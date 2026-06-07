@@ -1,0 +1,121 @@
+9. Modelo de Domínio
+
+9.1 Entidades
+
+9.1.1 Usuário
+Representa qualquer pessoa cadastrada no sistema.
+Tipos:
+    • Administrador
+    • Organizador
+    • Participante
+Responsabilidades:
+    • Autenticar
+    • Atualizar perfil
+    • Participar de eventos
+    • Organizar eventos
+9.1.2 Evento
+Representa um evento universitário.
+Exemplos:
+    • Festa
+    • Show
+    • Churrasco
+    • Recepção de Calouros
+    • Campeonato Universitário
+Responsabilidades:
+    • Receber inscrições
+    • Controlar vagas
+    • Gerenciar participantes
+9.1.3 Inscrição
+Representa a participação de um usuário em um evento.
+Responsabilidades:
+    • Relacionar participante e evento
+    • Controlar situação da inscrição
+Status:
+    • Pendente
+    • Confirmada
+    • Cancelada
+9.1.4 Pagamento
+Representa o pagamento realizado para participação no evento.
+Responsabilidades:
+    • Registrar valor
+    • Registrar data
+    • Registrar situação
+Status:
+    • Pendente
+    • Pago
+    • Cancelado
+    • Reembolsado
+9.1.5 Ingresso
+Representa o ingresso digital do participante.
+Responsabilidades:
+    • Possuir código único
+    • Possuir QR Code
+    • Permitir entrada no evento
+Status:
+    • Ativo
+    • Utilizado
+    • Cancelado
+9.1.6 Check-in
+Representa a validação da entrada do participante.
+Responsabilidades:
+    • Registrar acesso ao evento
+    • Registrar horário de entrada
+9.1.7 CategoriaEvento
+Representa a categoria de um evento.
+Exemplos:
+    • Festa
+    • Show
+    • Esportivo
+    • Acadêmico
+    • Recepção
+Benefícios:
+    • Organização
+    • Filtros
+    • Relatórios futuros
+9.1.8 BannerEvento
+Representa a imagem principal do evento.
+Responsabilidades:
+    • Exibir capa do evento
+    • Melhorar divulgação
+
+9.2 Relacionamentos
+
+9.2.1 Usuário → Evento
+
+    • Um organizador pode criar vários eventos.
+      
+Usuário(Organizador) 1 – N Eventos
+9.2.2 Categoria → Evento
+
+    • Uma categoria pode possuir vários eventos.
+
+Categoria 1 – N Evento
+
+9.2.3 Evento → Inscrição
+
+    • Um evento pode possuir várias inscrições.
+
+Evento 1 – N Inscrição
+
+9.2.4 Usuário → Inscrição
+
+    • Um participante pode possuir várias inscrições.
+
+Usuário 1 – N Inscrição
+
+9.2.5 Inscrição → Pagamento
+
+    • Uma inscrição possui um pagamento.
+
+Inscrição 1 – 1 Pagamentos
+
+9.2.6 Inscrição → Ingresso
+
+    • Uma inscrição gera um ingresso.
+
+Inscrição 1 – N Ingresso
+9.2.7 Ingresso → Check-in
+
+    • Um ingresso poderá possuir um check-in.
+
+Ingresso 1 – 0.1 Check-in

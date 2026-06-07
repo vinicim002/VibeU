@@ -1,0 +1,20 @@
+RNF01	Arquitetura Cliente-Servidor	O sistema deverá seguir arquitetura cliente-servidor.
+RNF02	API REST	O backend deverá disponibilizar funcionalidades através de API REST.
+RNF03	Banco Relacional	Os dados deverão ser armazenados em PostgreSQL.
+RNF04	Autenticação JWT	O sistema deverá utilizar autenticação baseada em JWT.
+RNF05	Controle de Acesso	O sistema deverá possuir perfis Administrador, Organizador e Participante.
+RNF06	Responsividade	A interface deverá funcionar adequadamente em desktop, tablet e smartphone.
+RNF07	Dockerização	Toda a aplicação deverá ser executada em containers Docker.
+RNF08	Docker Compose	Os containers deverão ser inicializados através do Docker Compose.
+RNF09	Tratamento de Erros	A API deverá retornar mensagens padronizadas para erros e exceções.
+RNF10	Validação de Dados	Todos os dados enviados para a API deverão ser validados.
+RNF11	Segurança de Senhas	As senhas deverão ser armazenadas de forma criptografada.
+RNF12	Versionamento da API	A API deverá utilizar versionamento através do padrão /api/v1.
+RNF13	Escalabilidade	A arquitetura deverá permitir futura migração para microserviços.
+RNF14	Versionamento de Código	Todo o código deverá ser versionado utilizando Git e GitHub.
+RNF15	Integração Contínua	O projeto deverá possuir pipeline CI/CD utilizando GitHub Actions.
+RNF16	Manutenibilidade	O código deverá seguir boas práticas e padrões definidos pela equipe.
+RNF17	Logs da Aplicação	O sistema deverá registrar logs para monitoramento e depuração.
+RNF18	Disponibilidade	A aplicação deverá estar disponível durante demonstrações e testes acadêmicos.
+RNF19	Padronização de Respostas	A API deverá possuir padrão único para respostas de sucesso e erro.
+RNF20	Compatibilidade de Navegadores	O frontend deverá funcionar nos principais navegadores modernos.

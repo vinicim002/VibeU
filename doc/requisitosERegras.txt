@@ -1,0 +1,619 @@
+5. Requisitos Funcionais
+
+# Requisitos Funcionais - VibeU
+
+## UC01 - RF01 - Cadastrar Usuário
+
+**Descrição:** O sistema deve permitir que novos usuários realizem cadastro informando nome, e-mail e senha.
+
+**Ator:** Participante
+
+**Prioridade:** Alta
+
+---
+
+## UC02 - RF02 - Autenticar Usuário
+
+**Descrição:** O sistema deve permitir que usuários realizem login utilizando e-mail e senha.
+
+**Ator:** Todos
+
+**Prioridade:** Alta
+
+---
+
+## UC03 - RF03 - Recuperar Senha
+
+**Descrição:** O sistema deve permitir que usuários solicitem recuperação de senha.
+
+**Ator:** Todos
+
+**Prioridade:** Média
+
+---
+
+## UC04 - RF04 - Gerenciar Perfil
+
+**Descrição:** O sistema deve permitir que usuários visualizem e atualizem suas informações pessoais.
+
+**Ator:** Todos
+
+**Prioridade:** Média
+
+---
+
+## UC05 - RF05 - Visualizar Eventos
+
+**Descrição:** O sistema deve permitir que usuários visualizem eventos disponíveis.
+
+**Ator:** Participante
+
+**Prioridade:** Alta
+
+---
+
+## UC06 - RF06 - Consultar Detalhes do Evento
+
+**Descrição:** O sistema deve permitir visualizar nome, descrição, data, horário, local, valor e vagas disponíveis.
+
+**Ator:** Participante
+
+**Prioridade:** Alta
+
+---
+
+## UC07 - RF07 - Criar Evento
+
+**Descrição:** O sistema deve permitir que organizadores criem eventos.
+
+**Ator:** Organizador
+
+**Prioridade:** Alta
+
+---
+
+## UC08 - RF08 - Editar Evento
+
+**Descrição:** O sistema deve permitir que organizadores alterem informações dos eventos.
+
+**Ator:** Organizador
+
+**Prioridade:** Alta
+
+---
+
+## UC09 - RF09 - Cancelar Evento
+
+**Descrição:** O sistema deve permitir que organizadores cancelem eventos.
+
+**Ator:** Organizador
+
+**Prioridade:** Média
+
+---
+
+## UC10 - RF10 - Excluir Evento
+
+**Descrição:** O sistema deve permitir excluir eventos não iniciados.
+
+**Ator:** Organizador
+
+**Prioridade:** Média
+
+---
+
+## UC11 - RF11 - Publicar Evento
+
+**Descrição:** O sistema deve permitir publicar eventos para visualização pública.
+
+**Ator:** Organizador
+
+**Prioridade:** Alta
+
+---
+
+## UC12 - RF12 - Controlar Vagas
+
+**Descrição:** O sistema deve controlar automaticamente capacidade máxima, vagas ocupadas e vagas disponíveis.
+
+**Ator:** Sistema
+
+**Prioridade:** Alta
+
+---
+
+## UC13 - RF13 - Realizar Inscrição em Evento
+
+**Descrição:** O sistema deve permitir que participantes realizem inscrições em eventos.
+
+**Ator:** Participante
+
+**Prioridade:** Alta
+
+---
+
+## UC14 - RF14 - Cancelar Inscrição
+
+**Descrição:** O sistema deve permitir que participantes cancelem inscrições.
+
+**Ator:** Participante
+
+**Prioridade:** Média
+
+---
+
+## UC15 - RF15 - Consultar Histórico de Inscrições
+
+**Descrição:** O sistema deve permitir que participantes consultem eventos inscritos e histórico de participação.
+
+**Ator:** Participante
+
+**Prioridade:** Média
+
+---
+
+## UC16 - RF16 - Registrar Pagamento
+
+**Descrição:** O sistema deve registrar pagamentos associados às inscrições.
+
+**Ator:** Participante
+
+**Prioridade:** Alta
+
+---
+
+## UC17 - RF17 - Consultar Status do Pagamento
+
+**Descrição:** O sistema deve permitir consultar status do pagamento (Pendente, Pago, Cancelado ou Reembolsado).
+
+**Ator:** Participante
+
+**Prioridade:** Alta
+
+---
+
+## UC18 - RF18 - Gerar Ingresso
+
+**Descrição:** O sistema deve gerar automaticamente um ingresso após confirmação do pagamento.
+
+**Ator:** Sistema
+
+**Prioridade:** Alta
+
+---
+
+## UC19 - RF19 - Gerar Código Único do Ingresso
+
+**Descrição:** Cada ingresso deve possuir um identificador único gerado automaticamente.
+
+**Ator:** Sistema
+
+**Prioridade:** Alta
+
+---
+
+## UC20 - RF20 - Gerar QR Code
+
+**Descrição:** O sistema deve gerar um QR Code associado ao ingresso.
+
+**Ator:** Sistema
+
+**Prioridade:** Alta
+
+---
+
+## UC21 - RF21 - Consultar Ingresso
+
+**Descrição:** O participante deve poder visualizar seu ingresso digital.
+
+**Ator:** Participante
+
+**Prioridade:** Alta
+
+---
+
+## UC22 - RF22 - Validar Ingresso
+
+**Descrição:** O sistema deve validar ingressos através do QR Code.
+
+**Ator:** Organizador
+
+**Prioridade:** Alta
+
+---
+
+## UC23 - RF23 - Realizar Check-in
+
+**Descrição:** O sistema deve registrar a entrada do participante no evento.
+
+**Ator:** Organizador
+
+**Prioridade:** Alta
+
+---
+
+## UC24 - RF24 - Controlar Utilização do Ingresso
+
+**Descrição:** O sistema deve impedir múltiplos check-ins utilizando o mesmo ingresso.
+
+**Ator:** Sistema
+
+**Prioridade:** Alta
+
+---
+
+## UC25 - RF25 - Administrar Usuários
+
+**Descrição:** Administradores devem poder visualizar e gerenciar usuários cadastrados.
+
+**Ator:** Administrador
+
+**Prioridade:** Média
+
+---
+
+## UC26 - RF26 - Upload de Banner do Evento
+
+**Descrição:** O sistema deve permitir que organizadores adicionem uma imagem de capa ao evento.
+
+**Ator:** Organizador
+
+**Prioridade:** Média
+
+---
+
+## UC27 - RF27 - Pesquisar Eventos
+
+**Descrição:** O sistema deve permitir pesquisar eventos por nome.
+
+**Ator:** Participante
+
+**Prioridade:** Média
+
+---
+
+## UC28 - RF28 - Filtrar Eventos
+
+**Descrição:** O sistema deve permitir filtrar eventos por data, local ou categoria.
+
+**Ator:** Participante
+
+**Prioridade:** Média
+
+---
+
+## UC29 - RF29 - Visualizar Participantes
+
+**Descrição:** O sistema deve permitir que organizadores visualizem os participantes inscritos em seus eventos.
+
+**Ator:** Organizador
+
+**Prioridade:** Média
+
+---
+
+## UC30 - RF30 - Encerrar Evento
+
+**Descrição:** O sistema deve permitir que organizadores alterem o status de um evento para encerrado.
+
+**Ator:** Organizador
+
+**Prioridade:** Baixa
+
+---
+
+## UC31 - RF31 - Dashboard Administrativo
+
+**Descrição:** O sistema poderá apresentar indicadores de eventos, participantes, ingressos emitidos e receita simulada.
+
+**Ator:** Administrador
+
+**Prioridade:** Baixa
+
+---
+
+## UC32 - RF32 - Gerenciar Lotes
+
+**Descrição:** O sistema deve permitir que organizadores criem, editem e removam lotes de ingressos para seus eventos.
+
+**Ator:** Organizador
+
+**Prioridade:** Alta
+
+---
+
+## UC33 - RF33 - Visualizar Lotes Disponíveis
+
+**Descrição:** O sistema deve permitir que participantes visualizem os lotes disponíveis para um evento.
+
+**Ator:** Participante
+
+**Prioridade:** Alta
+
+---
+
+## UC34 - RF34 - Selecionar Lote
+
+**Descrição:** O sistema deve permitir que participantes escolham um lote durante a inscrição.
+
+**Ator:** Participante
+
+**Prioridade:** Alta
+
+
+6. Requisitos Não Funcionais
+
+Requisitos Não Funcionais - VibeU
+RNF01 - Arquitetura Cliente-Servidor
+
+Descrição: O sistema deverá seguir uma arquitetura cliente-servidor, mantendo separação entre frontend, backend e banco de dados.
+
+Categoria: Arquitetura
+
+RNF02 - API REST
+
+Descrição: O backend deverá disponibilizar todas as funcionalidades através de uma API REST.
+
+Categoria: Arquitetura
+
+RNF03 - Banco de Dados Relacional
+
+Descrição: Todos os dados da aplicação deverão ser armazenados em um banco de dados PostgreSQL.
+
+Categoria: Banco de Dados
+
+RNF04 - Autenticação JWT
+
+Descrição: O sistema deverá utilizar autenticação baseada em JSON Web Token (JWT).
+
+Categoria: Segurança
+
+RNF05 - Controle de Acesso
+
+Descrição: O sistema deverá implementar controle de acesso baseado em perfis:
+
+Administrador
+Organizador
+Participante
+
+Categoria: Segurança
+
+RNF06 - Responsividade
+
+Descrição: A interface deverá funcionar adequadamente em dispositivos desktop, tablet e smartphone.
+
+Categoria: Usabilidade
+
+RNF07 - Dockerização
+
+Descrição: Toda a aplicação deverá ser executada em containers Docker.
+
+Categoria: Infraestrutura
+
+RNF08 - Docker Compose
+
+Descrição: Os containers da aplicação deverão ser inicializados e gerenciados através do Docker Compose.
+
+Categoria: Infraestrutura
+
+RNF09 - Tratamento de Erros
+
+Descrição: A API deverá retornar mensagens padronizadas para erros, exceções e validações.
+
+Categoria: Qualidade de Software
+
+RNF10 - Validação de Dados
+
+Descrição: Todos os dados recebidos pela API deverão passar por validações antes de serem processados.
+
+Categoria: Qualidade de Software
+
+RNF11 - Segurança de Senhas
+
+Descrição: As senhas dos usuários deverão ser armazenadas utilizando criptografia segura.
+
+Categoria: Segurança
+
+RNF12 - Versionamento da API
+
+Descrição: A API deverá utilizar versionamento seguindo o padrão:
+
+/api/v1
+
+Categoria: Arquitetura
+
+RNF13 - Escalabilidade
+
+Descrição: A arquitetura deverá permitir futura evolução para microsserviços sem necessidade de reestruturação completa.
+
+Categoria: Arquitetura
+
+RNF14 - Versionamento de Código
+
+Descrição: Todo o código-fonte deverá ser versionado utilizando Git e hospedado em repositório GitHub.
+
+Categoria: DevOps
+
+RNF15 - Integração Contínua
+
+Descrição: O projeto deverá possuir pipeline de Integração Contínua utilizando GitHub Actions.
+
+Categoria: DevOps
+
+RNF16 - Manutenibilidade
+
+Descrição: O código deverá seguir padrões de desenvolvimento definidos pela equipe, facilitando manutenção e evolução.
+
+Categoria: Qualidade de Software
+
+RNF17 - Logs da Aplicação
+
+Descrição: O sistema deverá registrar logs para monitoramento, auditoria e depuração de erros.
+
+Categoria: Observabilidade
+
+RNF18 - Disponibilidade
+
+Descrição: A aplicação deverá permanecer disponível durante demonstrações, apresentações acadêmicas e testes do projeto.
+
+Categoria: Confiabilidade
+
+RNF19 - Padronização de Respostas
+
+Descrição: A API deverá possuir um padrão único para respostas de sucesso e erro.
+
+Exemplo de Sucesso
+{
+  "success": true,
+  "message": "Operação realizada com sucesso",
+  "data": {}
+}
+Exemplo de Erro
+{
+  "success": false,
+  "message": "Erro ao processar solicitação",
+  "errors": []
+}
+
+Categoria: Arquitetura
+
+RNF20 - Compatibilidade de Navegadores
+
+Descrição: O frontend deverá funcionar corretamente nos principais navegadores modernos.
+
+Exemplos:
+
+Google Chrome
+Microsoft Edge
+Mozilla Firefox
+Safari
+
+Categoria: Compatibilidade
+
+7. Casos de Uso
+
+7.1 Participante
+
+    • UC01 - Cadastrar Usuário
+    • UC02 - Autenticar Usuário
+    • UC03 - Recuperar Senha
+    • UC04 - Gerenciar Perfil
+    • UC05 - Visualizar Eventos
+    • UC06 - Consultar Detalhes do Evento
+    • UC13 - Realizar Inscrição em Evento
+    • UC14 - Cancelar Inscrição
+    • UC15 - Consultar Histórico de Inscrições
+    • UC16 - Registrar Pagamento
+    • UC17 - Consultar Status do Pagamento
+    • UC21 - Consultar Ingresso
+    • UC27 - Pesquisar Eventos
+    • UC28 - Filtrar Eventos
+
+7.2 Organizador
+
+    • UC07 - Criar Evento
+    • UC08 - Editar Evento
+    • UC09 - Cancelar Evento
+    • UC10 - Excluir Evento
+    • UC11 - Publicar Evento
+    • UC22 - Validar Ingresso
+    • UC23 - Realizar Check-in
+    • UC26 - Upload de Banner do Evento
+    • UC29 - Visualizar Participantes
+    • UC30 - Encerrar Evento
+
+7.3 Administrador
+
+    • UC25 - Administrar Usuários
+    • UC31 - Dashboard Administrativo
+
+8. Regras de Negócio
+
+RN01 - Cadastro Único de Usuário
+Não deve existir mais de um usuário com o mesmo e-mail cadastrado no sistema.
+RN02 - Senha Segura
+A senha do usuário deverá possuir no mínimo:
+    • 8 caracteres
+    • 1 letra maiúscula
+    • 1 letra minúscula
+    • 1 número
+RN03 - Login Apenas para Usuários Ativos
+Somente usuários ativos poderão realizar autenticação.
+RN04 - Apenas Organizadores Criam Eventos
+Somente usuários com perfil ORGANIZER poderão criar eventos.
+RN05 - Evento Deve Possuir Informações Obrigatórias
+Todo evento deverá possuir:
+    • Nome
+    • Descrição
+    • Data
+    • Horário
+    • Local
+    • Capacidade máxima
+    • Valor do ingresso
+RN06 - Evento Deve Possuir Data Futura
+Não será permitido cadastrar eventos em datas passadas.
+RN07 - Evento Publicado Torna-se Visível
+Apenas eventos publicados poderão ser visualizados pelos participantes.
+RN08 - Evento Encerrado Não Aceita Inscrições
+Eventos encerrados não poderão receber novas inscrições.
+RN09 - Evento Cancelado Não Aceita Operações
+Eventos cancelados não poderão receber:
+    • Novas inscrições
+    • Pagamentos
+    • Check-ins
+RN10 - Limite de Participantes
+O número de participantes não poderá ultrapassar a capacidade máxima definida para o evento.
+RN11 - Inscrição Única por Evento
+Um participante poderá realizar apenas uma inscrição por evento.
+RN12 - Participante Deve Estar Autenticado
+Somente usuários autenticados poderão realizar inscrições.
+RN13 - Pagamento Vinculado à Inscrição
+Todo pagamento deverá estar associado a uma inscrição válida.
+RN14 - Pagamento Deve Ser Confirmado
+Somente pagamentos aprovados poderão gerar ingressos.
+RN15 - Um Ingresso por Inscrição
+Cada inscrição poderá gerar apenas um ingresso.
+RN16 - Código de Ingresso Único
+Todo ingresso deverá possuir um código único.
+Exemplo:
+VBU-2026-000001
+RN17 - QR Code Exclusivo
+Cada ingresso deverá possuir um QR Code único.
+RN18 - Check-in Apenas com Ingresso Válido
+O check-in somente poderá ser realizado mediante apresentação de ingresso válido.
+RN19 - Check-in Único
+Um ingresso poderá realizar apenas um check-in.
+RN20 - Registro da Entrada
+Ao realizar check-in o sistema deverá registrar:
+    • Data
+    • Hora
+RN21 - Exclusão de Evento
+Somente eventos sem participantes poderão ser excluídos.
+RN22 - Atualização de Vagas
+Sempre que ocorrer:
+    • Inscrição
+    • Cancelamento
+o sistema deverá recalcular automaticamente as vagas disponíveis.
+RN23 - Controle de Permissões
+Administradores possuem acesso total ao sistema.
+RN24 - Controle de Acesso por Perfil
+Cada funcionalidade deverá respeitar o perfil do usuário:
+    • ADMIN
+    • ORGANIZER
+    • PARTICIPANT
+RN25 - Histórico de Participação
+O sistema deverá manter o histórico de eventos dos participantes.
+RN26 - Auditoria
+Todas as entidades deverão armazenar:
+    • createdAt
+    • updatedAt
+RN27 - Evento Possui Um ou Mais Lotes
+Todo evento poderá possuir um ou mais lotes.
+RN28 - Inscrição Deve Estar Associada a um Lote
+Toda inscrição deverá estar vinculada a um lote.
+RN29 - Controle de Quantidade por Lote
+Cada lote deverá possuir uma quantidade máxima de ingressos.
+RN30 - Lote Esgotado
+Quando atingir o limite de ingressos, o lote será marcado como esgotado.
+RN31 - Valor do Pagamento
+O valor da inscrição será definido pelo lote escolhido.

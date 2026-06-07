@@ -1,0 +1,21 @@
+# Ambiente
+.env
+.env.local
+.env.*.local
+
+# Backups de banco (dumps locais)
+database/backups/*.sql
+database/backups/*.dump
+!database/backups/.gitkeep
+
+# Lock files de editores
+.~lock.*
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# SO
+.DS_Store
+Thumbs.db
