@@ -1,111 +1,117 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@import 'tailwindcss';
+@import 'react-toastify/dist/ReactToastify.css';
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+@theme {
+  --color-primary: #6d28d9;
+  --color-primary-light: #8b5cf6;
+  --color-secondary: #3b82f6;
+  --color-accent: #ec4899;
+  --color-accent-yellow: #e2ff00;
+  --color-bg-dark: #050505;
+  --color-bg-slate: #0f172a;
+  --color-bg-gray: #111827;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #e5e7eb;
+  --color-text-muted: #9ca3af;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --font-display: 'Bebas Neue', 'Anton', 'Oswald', sans-serif;
+  --font-heading: 'Oswald', 'Anton', sans-serif;
+  --font-body: 'Inter', 'Poppins', 'Manrope', sans-serif;
+}
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-secondary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
+    color: white;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
   }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+  .font-heading {
+    font-family: var(--font-heading);
   }
-}
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+  .font-body {
+    font-family: var(--font-body);
   }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
+
+  .text-glow-purple {
+    text-shadow: 0 0 40px rgba(109, 40, 217, 0.6);
   }
-}
-p {
-  margin: 0;
-}
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
+  .text-glow-pink {
+    text-shadow: 0 0 30px rgba(236, 72, 153, 0.5);
+  }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+  .glow-purple {
+    box-shadow: 0 0 30px rgba(109, 40, 217, 0.35);
+  }
+
+  .glow-pink {
+    box-shadow: 0 0 25px rgba(236, 72, 153, 0.3);
+  }
+
+  .gradient-vibe {
+    background: linear-gradient(135deg, #6d28d9 0%, #3b82f6 50%, #ec4899 100%);
+  }
+
+  .gradient-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(5, 5, 5, 0.3) 0%,
+      rgba(5, 5, 5, 0.7) 50%,
+      rgba(5, 5, 5, 0.95) 100%
+    );
+  }
+
+  .ticket-notch {
+    clip-path: polygon(
+      0 0,
+      calc(100% - 12px) 0,
+      100% 50%,
+      calc(100% - 12px) 100%,
+      0 100%
+    );
+  }
+
+  .marquee-track {
+    animation: marquee 25s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 }
