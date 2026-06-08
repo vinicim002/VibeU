@@ -1,5 +1,7 @@
 export type UserRole = 'ADMINISTRADOR' | 'ORGANIZADOR' | 'PARTICIPANTE'
 
+export type EntityStatus = 'ATIVO' | 'INATIVO'
+
 export type EventStatus = 'RASCUNHO' | 'PUBLICADO' | 'CANCELADO' | 'ENCERRADO'
 
 export type InscriptionStatus = 'PENDENTE' | 'CONFIRMADA' | 'CANCELADA'
@@ -10,10 +12,37 @@ export type TicketStatus = 'ATIVO' | 'UTILIZADO' | 'CANCELADO'
 
 export type EventCategory =
   | 'FESTA'
+  | 'OPEN_BAR'
   | 'SHOW'
+  | 'ATLETICA'
+  | 'JOGOS_UNIVERSITARIOS'
+  | 'RECEPCAO'
+  | 'WORKSHOP'
+  | 'PALESTRA'
+  | 'FEIRA_ACADEMICA'
+  | 'CULTURAL'
   | 'ESPORTIVO'
   | 'ACADEMICO'
-  | 'RECEPCAO'
+
+export interface Faculdade {
+  id: string
+  nome: string
+  sigla: string
+  cidade: string
+  estado: string
+  logo: string
+  status: EntityStatus
+}
+
+export interface Atletica {
+  id: string
+  nome: string
+  sigla: string
+  logo: string
+  descricao: string
+  faculdadeId: string
+  status: EntityStatus
+}
 
 export interface User {
   id: string
@@ -54,13 +83,60 @@ export interface Event {
   endTime?: string
   location: string
   address: string
+  cidade: string
+  estado: string
   capacity: number
   organizerId: string
   organizerName: string
   status: EventStatus
+  faculdadeIds: string[]
+  atleticaIds: string[]
   lots: Lot[]
   schedule: ScheduleItem[]
+  rules: string[]
+  featured: boolean
+  popularityScore: number
   createdAt: string
+}
+
+export interface EventWithRelations extends Event {
+  faculdades: Faculdade[]
+  atleticas: Atletica[]
+}
+
+export interface FaculdadeWithStats extends Faculdade {
+  activeEventCount: number
+  totalPopularity: number
+}
+
+export interface AtleticaEventPreview {
+  id: string
+  name: string
+  date: string
+}
+
+export interface AtleticaWithStats extends Atletica {
+  faculdadeSigla: string
+  faculdadeNome: string
+  activeEventCount: number
+  nextEvent?: AtleticaEventPreview
+  lastEvent?: AtleticaEventPreview
+}
+
+export interface EventFilters {
+  search?: string
+  category?: string
+  faculdadeId?: string
+  atleticaId?: string
+  cidade?: string
+  estado?: string
+  dateFrom?: string
+  dateTo?: string
+  priceMin?: number
+  priceMax?: number
+  featured?: boolean
+  status?: string
+  allStatuses?: boolean
 }
 
 export interface Inscription {
@@ -111,4 +187,6 @@ export interface DashboardStats {
   totalRevenue: number
   activeTickets: number
   checkInsToday: number
+  totalFaculdades: number
+  totalAtleticas: number
 }

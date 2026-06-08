@@ -22,15 +22,26 @@ export const STORAGE_KEYS = {
   PAYMENTS: 'vibeu_payments',
   TICKETS: 'vibeu_tickets',
   CHECKINS: 'vibeu_checkins',
+  FACULDADES: 'vibeu_faculdades',
+  ATLETICAS: 'vibeu_atleticas',
   SEEDED: 'vibeu_seeded',
+  SEED_VERSION: 'vibeu_seed_version',
+  THEME: 'vibeu_theme',
 } as const
 
 export const CATEGORY_LABELS: Record<string, string> = {
-  FESTA: 'Festa',
-  SHOW: 'Show',
+  FESTA: 'Festas Universitárias',
+  OPEN_BAR: 'Open Bar',
+  SHOW: 'Shows',
+  ATLETICA: 'Atléticas',
+  JOGOS_UNIVERSITARIOS: 'Jogos Universitários',
+  RECEPCAO: 'Recepção de Calouros',
+  WORKSHOP: 'Workshops',
+  PALESTRA: 'Palestras',
+  FEIRA_ACADEMICA: 'Feiras Acadêmicas',
+  CULTURAL: 'Eventos Culturais',
   ESPORTIVO: 'Esportivo',
   ACADEMICO: 'Acadêmico',
-  RECEPCAO: 'Recepção',
 }
 
 export const EVENT_STATUS_LABELS: Record<string, string> = {

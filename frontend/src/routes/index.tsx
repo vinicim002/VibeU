@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { ProtectedRoute } from '@/components/common/ProtectedRoute'
+import { RequireAuth } from '@/components/common/RequireAuth'
 import { MainLayout } from '@/layouts/MainLayout'
 import { AuthLayout } from '@/layouts/AuthLayout'
 import { DashboardLayout } from '@/layouts/DashboardLayout'
@@ -28,9 +29,9 @@ export function AppRoutes() {
           <Route
             path={ROUTES.PROFILE}
             element={
-              <ProtectedRoute>
+              <RequireAuth>
                 <ProfilePage />
-              </ProtectedRoute>
+              </RequireAuth>
             }
           />
         </Route>
@@ -43,22 +44,24 @@ export function AppRoutes() {
           <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPasswordPage />} />
         </Route>
 
-        <Route
-          element={
-            <ProtectedRoute roles={['ADMINISTRADOR']}>
+        <Route element={<ProtectedRoute roles={['ADMINISTRADOR']} />}>
+          <Route
+            path={ROUTES.ADMIN_DASHBOARD}
+            element={
               <DashboardLayout
                 title="ADMIN"
                 navItems={[{ to: ROUTES.ADMIN_DASHBOARD, label: 'Visão Geral' }]}
               />
-            </ProtectedRoute>
-          }
-        >
-          <Route path={ROUTES.ADMIN_DASHBOARD} element={<AdminDashboard />} />
+            }
+          >
+            <Route index element={<AdminDashboard />} />
+          </Route>
         </Route>
 
-        <Route
-          element={
-            <ProtectedRoute roles={['ORGANIZADOR']}>
+        <Route element={<ProtectedRoute roles={['ORGANIZADOR']} />}>
+          <Route
+            path={ROUTES.ORGANIZER_DASHBOARD}
+            element={
               <DashboardLayout
                 title="ORGANIZADOR"
                 navItems={[
@@ -66,16 +69,30 @@ export function AppRoutes() {
                   { to: ROUTES.ORGANIZER_CREATE_EVENT, label: 'Novo Evento' },
                 ]}
               />
-            </ProtectedRoute>
-          }
-        >
-          <Route path={ROUTES.ORGANIZER_DASHBOARD} element={<OrganizerDashboard />} />
-          <Route path={ROUTES.ORGANIZER_CREATE_EVENT} element={<CreateEventPage />} />
+            }
+          >
+            <Route index element={<OrganizerDashboard />} />
+          </Route>
+          <Route
+            path={ROUTES.ORGANIZER_CREATE_EVENT}
+            element={
+              <DashboardLayout
+                title="ORGANIZADOR"
+                navItems={[
+                  { to: ROUTES.ORGANIZER_DASHBOARD, label: 'Meus Eventos' },
+                  { to: ROUTES.ORGANIZER_CREATE_EVENT, label: 'Novo Evento' },
+                ]}
+              />
+            }
+          >
+            <Route index element={<CreateEventPage />} />
+          </Route>
         </Route>
 
-        <Route
-          element={
-            <ProtectedRoute roles={['PARTICIPANTE']}>
+        <Route element={<ProtectedRoute roles={['PARTICIPANTE']} />}>
+          <Route
+            path={ROUTES.PARTICIPANT_DASHBOARD}
+            element={
               <DashboardLayout
                 title="PARTICIPANTE"
                 navItems={[
@@ -83,10 +100,10 @@ export function AppRoutes() {
                   { to: ROUTES.EVENTS, label: 'Explorar' },
                 ]}
               />
-            </ProtectedRoute>
-          }
-        >
-          <Route path={ROUTES.PARTICIPANT_DASHBOARD} element={<ParticipantDashboard />} />
+            }
+          >
+            <Route index element={<ParticipantDashboard />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />

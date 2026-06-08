@@ -86,7 +86,7 @@ export function OrganizerDashboard() {
         {statCards.map((stat) => (
           <Card key={stat.label} className="p-5" glow>
             <p className="text-xs uppercase tracking-wider text-text-muted">{stat.label}</p>
-            <p className="mt-2 font-display text-3xl text-white">{stat.value}</p>
+            <p className="mt-2 font-display text-3xl text-foreground">{stat.value}</p>
           </Card>
         ))}
       </div>
@@ -112,9 +112,9 @@ export function OrganizerDashboard() {
                   className="h-16 w-16 rounded-xl object-cover"
                 />
                 <div>
-                  <h3 className="font-heading font-bold uppercase text-white">{event.name}</h3>
+                  <h3 className="font-heading font-bold uppercase text-foreground">{event.name}</h3>
                   <p className="text-sm text-text-muted">
-                    {formatDate(event.date)} • {event.location}
+                    {formatDate(event.date)} • {event.location} • {event.cidade}/{event.estado}
                   </p>
                   <Badge
                     variant={event.status === 'PUBLICADO' ? 'success' : event.status === 'CANCELADO' ? 'danger' : 'default'}

@@ -13,11 +13,18 @@ interface EventFormProps {
 }
 
 const categoryOptions = [
-  { value: 'FESTA', label: 'Festa' },
-  { value: 'SHOW', label: 'Show' },
+  { value: 'FESTA', label: 'Festas Universitárias' },
+  { value: 'OPEN_BAR', label: 'Open Bar' },
+  { value: 'SHOW', label: 'Shows' },
+  { value: 'ATLETICA', label: 'Atléticas' },
+  { value: 'JOGOS_UNIVERSITARIOS', label: 'Jogos Universitários' },
+  { value: 'RECEPCAO', label: 'Recepção de Calouros' },
+  { value: 'WORKSHOP', label: 'Workshops' },
+  { value: 'PALESTRA', label: 'Palestras' },
+  { value: 'FEIRA_ACADEMICA', label: 'Feiras Acadêmicas' },
+  { value: 'CULTURAL', label: 'Eventos Culturais' },
   { value: 'ESPORTIVO', label: 'Esportivo' },
   { value: 'ACADEMICO', label: 'Acadêmico' },
-  { value: 'RECEPCAO', label: 'Recepção' },
 ]
 
 export function EventForm({
@@ -48,7 +55,7 @@ export function EventForm({
         </label>
         <textarea
           rows={4}
-          className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none focus:border-primary"
+          className="w-full rounded-xl border border-border/10 bg-surface/5 px-4 py-3 text-sm text-foreground outline-none focus:border-primary"
           {...register('description')}
         />
         {errors.description ? (
@@ -69,6 +76,10 @@ export function EventForm({
       <Input label="Horário fim" type="time" error={errors.endTime?.message} {...register('endTime')} />
       <Input label="Local" error={errors.location?.message} {...register('location')} />
       <Input label="Endereço" error={errors.address?.message} {...register('address')} />
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Input label="Cidade" error={errors.cidade?.message} {...register('cidade')} />
+        <Input label="Estado (UF)" error={errors.estado?.message} {...register('estado')} maxLength={2} />
+      </div>
       <Input
         label="Capacidade"
         type="number"

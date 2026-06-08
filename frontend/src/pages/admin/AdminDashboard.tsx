@@ -57,6 +57,8 @@ export function AdminDashboard() {
 
   const statCards = [
     { label: 'Eventos', value: stats.totalEvents, color: 'text-primary-light' },
+    { label: 'Faculdades', value: stats.totalFaculdades, color: 'text-violet-400' },
+    { label: 'Atléticas', value: stats.totalAtleticas, color: 'text-cyan-400' },
     { label: 'Usuários', value: stats.totalUsers, color: 'text-secondary' },
     { label: 'Inscrições', value: stats.totalInscriptions, color: 'text-accent' },
     { label: 'Receita', value: formatCurrency(stats.totalRevenue), color: 'text-accent-yellow' },
@@ -84,7 +86,7 @@ export function AdminDashboard() {
 
       <div className="grid gap-8 lg:grid-cols-2">
         <Card className="p-6">
-          <h3 className="font-heading text-sm font-bold uppercase text-white">
+          <h3 className="font-heading text-sm font-bold uppercase text-foreground">
             Receita mensal
           </h3>
           <div className="mt-4 h-64">
@@ -104,7 +106,7 @@ export function AdminDashboard() {
         </Card>
 
         <Card className="p-6">
-          <h3 className="font-heading text-sm font-bold uppercase text-white">
+          <h3 className="font-heading text-sm font-bold uppercase text-foreground">
             Eventos por categoria
           </h3>
           <div className="mt-4 h-64">
@@ -131,11 +133,11 @@ export function AdminDashboard() {
       </div>
 
       <Card className="p-6">
-        <h3 className="font-heading text-sm font-bold uppercase text-white">Todos os eventos</h3>
+        <h3 className="font-heading text-sm font-bold uppercase text-foreground">Todos os eventos</h3>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-white/10 text-text-muted">
+              <tr className="border-b border-border/10 text-text-muted">
                 <th className="pb-3 pr-4">Nome</th>
                 <th className="pb-3 pr-4">Status</th>
                 <th className="pb-3 pr-4">Organizador</th>
@@ -144,8 +146,8 @@ export function AdminDashboard() {
             </thead>
             <tbody>
               {events?.map((event) => (
-                <tr key={event.id} className="border-b border-white/5">
-                  <td className="py-3 pr-4 font-medium text-white">{event.name}</td>
+                <tr key={event.id} className="border-b border-border/5">
+                  <td className="py-3 pr-4 font-medium text-foreground">{event.name}</td>
                   <td className="py-3 pr-4">
                     <Badge variant={event.status === 'PUBLICADO' ? 'success' : 'default'}>
                       {EVENT_STATUS_LABELS[event.status]}
@@ -161,11 +163,11 @@ export function AdminDashboard() {
       </Card>
 
       <Card className="p-6">
-        <h3 className="font-heading text-sm font-bold uppercase text-white">Usuários</h3>
+        <h3 className="font-heading text-sm font-bold uppercase text-foreground">Usuários</h3>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-white/10 text-text-muted">
+              <tr className="border-b border-border/10 text-text-muted">
                 <th className="pb-3 pr-4">Nome</th>
                 <th className="pb-3 pr-4">E-mail</th>
                 <th className="pb-3">Perfil</th>
@@ -173,8 +175,8 @@ export function AdminDashboard() {
             </thead>
             <tbody>
               {users?.map((user) => (
-                <tr key={user.id} className="border-b border-white/5">
-                  <td className="py-3 pr-4 font-medium text-white">{user.name}</td>
+                <tr key={user.id} className="border-b border-border/5">
+                  <td className="py-3 pr-4 font-medium text-foreground">{user.name}</td>
                   <td className="py-3 pr-4 text-text-muted">{user.email}</td>
                   <td className="py-3">
                     <Badge variant="purple">{user.role}</Badge>

@@ -28,7 +28,7 @@ export function CreateEventPage() {
 
   return (
     <div className="max-w-2xl">
-      <h2 className="font-heading text-2xl font-bold uppercase text-white">
+      <h2 className="font-heading text-2xl font-bold uppercase text-foreground">
         Novo evento
       </h2>
       <p className="mt-2 text-sm text-text-muted">

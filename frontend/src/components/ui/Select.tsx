@@ -20,7 +20,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <select
           ref={ref}
           id={selectId}
-          className={`w-full rounded-xl border border-white/10 bg-bg-gray px-4 py-3 text-sm text-white outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30 ${error ? 'border-red-500/50' : ''} ${className}`}
+          className={`w-full rounded-xl border border-border/10 bg-bg-gray px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30 ${error ? 'border-red-500/50' : ''} ${className}`}
           {...props}
         >
           {options.map((opt) => (

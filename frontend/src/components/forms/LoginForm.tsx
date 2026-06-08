@@ -63,7 +63,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
         Entrar
       </Button>
 
-      <div className="rounded-xl border border-white/5 bg-white/5 p-4">
+      <div className="rounded-xl border border-border/5 bg-surface/5 p-4">
         <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-text-muted">
           Contas demo (localStorage)
         </p>
@@ -76,7 +76,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
                 setValue('email', cred.email)
                 setValue('password', cred.password)
               }}
-              className="rounded-full border border-white/10 px-3 py-1 text-xs text-text-muted transition hover:border-primary hover:text-white"
+              className="rounded-full border border-border/10 px-3 py-1 text-xs text-text-muted transition hover:border-primary hover:text-foreground"
             >
               {cred.role}
             </button>

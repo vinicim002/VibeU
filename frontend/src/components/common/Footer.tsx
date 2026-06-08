@@ -3,11 +3,11 @@ import { ROUTES } from '@/constants/routes'
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/5 bg-bg-slate">
+    <footer className="border-t border-border/5 bg-bg-slate">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-3">
           <div>
-            <span className="font-display text-3xl tracking-widest text-white">
+            <span className="font-display text-3xl tracking-widest text-foreground">
               VIBE<span className="text-accent">U</span>
             </span>
             <p className="mt-4 text-sm text-text-muted">
@@ -16,22 +16,22 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-heading text-sm font-semibold uppercase tracking-wider text-white">
+            <h4 className="font-heading text-sm font-semibold uppercase tracking-wider text-foreground">
               Links Rápidos
             </h4>
             <ul className="mt-4 space-y-2">
               <li>
-                <Link to={ROUTES.EVENTS} className="text-sm text-text-muted hover:text-white">
+                <Link to={ROUTES.EVENTS} className="text-sm text-text-muted hover:text-foreground">
                   Eventos
                 </Link>
               </li>
               <li>
-                <Link to={ROUTES.LOGIN} className="text-sm text-text-muted hover:text-white">
+                <Link to={ROUTES.LOGIN} className="text-sm text-text-muted hover:text-foreground">
                   Login
                 </Link>
               </li>
               <li>
-                <Link to={ROUTES.REGISTER} className="text-sm text-text-muted hover:text-white">
+                <Link to={ROUTES.REGISTER} className="text-sm text-text-muted hover:text-foreground">
                   Cadastro
                 </Link>
               </li>
@@ -39,7 +39,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-heading text-sm font-semibold uppercase tracking-wider text-white">
+            <h4 className="font-heading text-sm font-semibold uppercase tracking-wider text-foreground">
               Newsletter
             </h4>
             <p className="mt-4 text-sm text-text-muted">
@@ -49,7 +49,7 @@ export function Footer() {
               <input
                 type="email"
                 placeholder="seu@email.edu"
-                className="flex-1 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white outline-none focus:border-primary"
+                className="flex-1 rounded-full border border-border/10 bg-surface/5 px-4 py-2 text-sm text-foreground outline-none focus:border-primary"
               />
               <button
                 type="button"
@@ -61,7 +61,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-white/5 pt-8 text-center text-xs text-text-muted">
+        <div className="mt-12 border-t border-border/5 pt-8 text-center text-xs text-text-muted">
           © {new Date().getFullYear()} VibeU. Todos os direitos reservados.
         </div>
       </div>

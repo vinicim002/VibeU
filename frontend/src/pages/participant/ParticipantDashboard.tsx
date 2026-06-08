@@ -9,23 +9,30 @@ import {
 } from '@/api/mockApi'
 import { useAuth } from '@/contexts/AuthContext'
 import { ROUTES } from '@/constants/routes'
-import { formatCurrency, formatDate } from '@/utils/format'
+import { formatDate } from '@/utils/format'
+import { DigitalTicket } from '@/components/ticket/DigitalTicket'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
-import { Badge } from '@/components/ui/Badge'
 import { Input } from '@/components/ui/Input'
 import { LoadingState } from '@/components/ui/LoadingState'
 import { EmptyState } from '@/components/ui/EmptyState'
+import { ErrorState } from '@/components/ui/ErrorState'
 
 export function ParticipantDashboard() {
   const { user } = useAuth()
   const queryClient = useQueryClient()
   const [checkInCode, setCheckInCode] = useState('')
 
-  const { data: inscriptions, isLoading } = useQuery({
+  const {
+    data: inscriptions,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
     queryKey: ['user-inscriptions', user?.id],
     queryFn: () => fetchUserInscriptions(user!.id),
-    enabled: !!user,
+    enabled: Boolean(user?.id),
+    refetchOnMount: 'always',
   })
 
   const cancelMutation = useMutation({
@@ -47,10 +54,22 @@ export function ParticipantDashboard() {
     onError: (e: Error) => toast.error(e.message),
   })
 
+  if (!user) return null
+
+  if (isLoading) return <LoadingState message="Carregando seus ingressos..." />
+
+  if (isError) {
+    return (
+      <ErrorState
+        message="Não foi possível carregar seus ingressos."
+        onRetry={() => refetch()}
+      />
+    )
+  }
+
   const active = inscriptions?.filter((i) => i.inscription.status === 'CONFIRMADA') ?? []
   const history = inscriptions?.filter((i) => i.inscription.status === 'CANCELADA') ?? []
-
-  if (isLoading) return <LoadingState />
+  const ticketsWithData = active.filter((item) => item.ticket && item.event)
 
   return (
     <div className="space-y-8">
@@ -72,13 +91,13 @@ export function ParticipantDashboard() {
       </div>
 
       <Card className="p-6">
-        <h3 className="font-heading text-sm font-bold uppercase text-white">
-          Simular check-in (organizador)
+        <h3 className="font-heading text-sm font-bold uppercase text-foreground">
+          Simular check-in
         </h3>
         <p className="mt-1 text-sm text-text-muted">
           Cole o código do ingresso para validar entrada
         </p>
-        <div className="mt-4 flex gap-3">
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row">
           <Input
             placeholder="VBU-XXXXXXXX"
             value={checkInCode}
@@ -96,73 +115,68 @@ export function ParticipantDashboard() {
       </Card>
 
       <section>
-        <h3 className="font-heading text-lg font-bold uppercase text-white">
-          Meus eventos
-        </h3>
-
-        {active.length === 0 ? (
-          <div className="mt-6">
-            <EmptyState
-              title="Nenhuma inscrição ativa"
-              description="Explore os eventos e garanta seu ingresso."
-              action={
-                <Link to={ROUTES.EVENTS}>
-                  <Button variant="ticket">Ver eventos</Button>
-                </Link>
-              }
-            />
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-xs font-bold tracking-[0.3em] text-accent uppercase">
+              Wallet
+            </p>
+            <h3 className="font-display text-3xl tracking-wider text-foreground sm:text-4xl">
+              MEUS INGRESSOS
+            </h3>
           </div>
+          <Link
+            to={ROUTES.EVENTS}
+            className="inline-flex items-center justify-center rounded-full border border-border/20 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-foreground transition hover:border-border/40 hover:bg-surface/5"
+          >
+            + Novo evento
+          </Link>
+        </div>
+
+        {ticketsWithData.length === 0 ? (
+          <EmptyState
+            title="Nenhum ingresso ativo"
+            description="Explore os eventos e garanta seu ingresso digital."
+            action={
+              <Link
+                to={ROUTES.EVENTS}
+                className="inline-flex items-center justify-center rounded-full bg-accent-yellow px-6 py-3 text-sm font-bold tracking-wider text-black uppercase ticket-notch"
+              >
+                Ver eventos
+              </Link>
+            }
+          />
         ) : (
-          <div className="mt-6 space-y-4">
-            {active.map(({ inscription, event, payment, ticket }) => (
-              <Card key={inscription.id} className="p-6" glow>
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={event.bannerUrl}
-                      alt=""
-                      className="h-20 w-20 rounded-xl object-cover"
-                    />
-                    <div>
-                      <h4 className="font-heading font-bold uppercase text-white">
-                        {event.name}
-                      </h4>
-                      <p className="text-sm text-text-muted">
-                        {formatDate(event.date)} • {event.location}
-                      </p>
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        <Badge variant="success">{inscription.status}</Badge>
-                        {payment ? (
-                          <Badge variant="purple">
-                            {payment.status} — {formatCurrency(payment.amount)}
-                          </Badge>
-                        ) : null}
-                        {ticket ? (
-                          <Badge variant={ticket.status === 'ATIVO' ? 'accent' : 'warning'}>
-                            Ingresso {ticket.status}
-                          </Badge>
-                        ) : null}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {ticket ? (
-                      <Link to={ROUTES.TICKET.replace(':id', ticket.id)}>
-                        <Button variant="ticket" size="sm">
-                          Ver ingresso
-                        </Button>
-                      </Link>
-                    ) : null}
-                    <Button
-                      variant="danger"
-                      size="sm"
-                      onClick={() => cancelMutation.mutate(inscription.id)}
-                    >
-                      Cancelar
-                    </Button>
-                  </div>
+          <div className="space-y-6">
+            {ticketsWithData.map(({ event, ticket, inscription }, index) => (
+              <div key={ticket!.id} className="space-y-3">
+                <Link
+                  to={ROUTES.TICKET.replace(':id', ticket!.id)}
+                  className="block transition hover:brightness-105"
+                >
+                  <DigitalTicket
+                    ticket={ticket!}
+                    event={event}
+                    user={user}
+                    index={index}
+                  />
+                </Link>
+
+                <div className="flex flex-wrap items-center justify-end gap-2 px-1">
+                  <Link
+                    to={ROUTES.TICKET.replace(':id', ticket!.id)}
+                    className="inline-flex items-center justify-center rounded-full border border-border/20 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-foreground transition hover:border-border/40"
+                  >
+                    Tela cheia
+                  </Link>
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={() => cancelMutation.mutate(inscription.id)}
+                  >
+                    Cancelar inscrição
+                  </Button>
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
         )}
@@ -177,9 +191,9 @@ export function ParticipantDashboard() {
             {history.map(({ inscription, event }) => (
               <div
                 key={inscription.id}
-                className="rounded-xl border border-white/5 bg-white/5 px-4 py-3 text-sm text-text-muted"
+                className="rounded-xl border border-border/5 bg-surface/5 px-4 py-3 text-sm text-text-muted"
               >
-                {event.name} — {formatDate(event.date)} — Cancelada
+                {event?.name ?? 'Evento'} — {event ? formatDate(event.date) : '—'} — Cancelada
               </div>
             ))}
           </div>

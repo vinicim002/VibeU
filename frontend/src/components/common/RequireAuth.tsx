@@ -1,10 +1,11 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 import { ROUTES } from '@/constants/routes'
 import type { UserRole } from '@/types'
 import { LoadingState } from '@/components/ui/LoadingState'
 
-interface ProtectedRouteProps {
+interface RequireAuthProps {
+  children: React.ReactNode
   roles?: UserRole[]
 }
 
@@ -14,7 +15,7 @@ function getDashboardRoute(role: UserRole): string {
   return ROUTES.PARTICIPANT_DASHBOARD
 }
 
-export function ProtectedRoute({ roles }: ProtectedRouteProps) {
+export function RequireAuth({ children, roles }: RequireAuthProps) {
   const { user, isLoading } = useAuth()
   const location = useLocation()
 
@@ -28,5 +29,5 @@ export function ProtectedRoute({ roles }: ProtectedRouteProps) {
     return <Navigate to={getDashboardRoute(user.role)} replace />
   }
 
-  return <Outlet />
+  return children
 }

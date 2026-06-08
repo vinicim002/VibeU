@@ -7,7 +7,7 @@ export function RegisterPage() {
 
   return (
     <div>
-      <h2 className="font-heading text-3xl font-bold uppercase tracking-wide text-white">
+      <h2 className="font-heading text-3xl font-bold uppercase tracking-wide text-foreground">
         Criar conta
       </h2>
       <p className="mt-2 text-sm text-text-muted">

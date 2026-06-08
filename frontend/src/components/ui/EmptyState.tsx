@@ -11,10 +11,10 @@ export function EmptyState({ title, description, action }: EmptyStateProps) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-white/10 bg-white/5 px-8 py-16 text-center"
+      className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border/10 bg-surface/5 px-8 py-16 text-center"
     >
       <div className="mb-4 text-5xl opacity-30">🎫</div>
-      <h3 className="font-heading text-xl font-semibold uppercase tracking-wide text-white">
+      <h3 className="font-heading text-xl font-semibold uppercase tracking-wide text-foreground">
         {title}
       </h3>
       {description ? (

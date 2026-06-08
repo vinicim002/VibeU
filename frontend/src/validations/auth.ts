@@ -30,13 +30,19 @@ export const forgotPasswordSchema = z.object({
 export const eventSchema = z.object({
   name: z.string().min(3, 'Nome deve ter no mínimo 3 caracteres'),
   description: z.string().min(10, 'Descrição deve ter no mínimo 10 caracteres'),
-  category: z.enum(['FESTA', 'SHOW', 'ESPORTIVO', 'ACADEMICO', 'RECEPCAO']),
+  category: z.enum([
+    'FESTA', 'OPEN_BAR', 'SHOW', 'ATLETICA', 'JOGOS_UNIVERSITARIOS',
+    'RECEPCAO', 'WORKSHOP', 'PALESTRA', 'FEIRA_ACADEMICA', 'CULTURAL',
+    'ESPORTIVO', 'ACADEMICO',
+  ]),
   bannerUrl: z.string().url('URL do banner inválida'),
   date: z.string().min(1, 'Data é obrigatória'),
   time: z.string().min(1, 'Horário é obrigatório'),
   endTime: z.string().optional(),
   location: z.string().min(3, 'Local é obrigatório'),
   address: z.string().min(5, 'Endereço é obrigatório'),
+  cidade: z.string().min(2, 'Cidade é obrigatória'),
+  estado: z.string().length(2, 'UF deve ter 2 letras'),
   capacity: z.number({ error: 'Capacidade é obrigatória' }).min(1, 'Capacidade mínima é 1'),
 })
 

@@ -16,7 +16,7 @@ const variants: Record<Variant, string> = {
   secondary:
     'bg-secondary hover:bg-blue-500 text-white border border-secondary/50',
   ghost:
-    'bg-transparent hover:bg-white/5 text-white border border-white/20 hover:border-white/40',
+    'bg-transparent hover:bg-surface/5 text-foreground border border-border/20 hover:border-border/40',
   accent:
     'bg-accent hover:bg-pink-500 text-white glow-pink border border-accent/50',
   ticket:

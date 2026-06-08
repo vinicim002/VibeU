@@ -12,7 +12,7 @@ export function Card({ children, glow, hover = true, className = '', ...props }:
     <motion.div
       whileHover={hover ? { y: -4, scale: 1.01 } : undefined}
       transition={{ duration: 0.2 }}
-      className={`rounded-2xl border border-white/10 bg-bg-gray/80 backdrop-blur-sm ${glow ? 'glow-purple hover:glow-pink' : ''} ${className}`}
+      className={`theme-card rounded-2xl border border-border/10 bg-bg-gray/80 backdrop-blur-sm ${glow ? 'glow-purple hover:glow-pink' : ''} ${className}`}
       {...props}
     >
       {children}
