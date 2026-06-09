@@ -57,7 +57,7 @@ export function UniversityShowcase() {
               className="w-[min(280px,78vw)] shrink-0 lg:w-auto"
             >
               <Link
-                to={`${ROUTES.EVENTS}?faculdade=${fac.id}`}
+                to={ROUTES.FACULDADE_DETAIL.replace(':id', fac.id)}
                 className="group relative flex h-72 flex-col justify-between overflow-hidden rounded-2xl border border-border/10 p-6 transition duration-300 hover:scale-[1.03] hover:border-secondary/50 hover:shadow-[0_0_40px_rgba(59,130,246,0.2)]"
               >
                 <div

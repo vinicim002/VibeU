@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ROUTES } from '@/constants/routes'
+import { Logo } from '@/components/common/Logo'
+import { NavScrollLink } from '@/components/common/NavScrollLink'
 
 export function Footer() {
   return (
@@ -7,9 +9,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-3">
           <div>
-            <span className="font-display text-3xl tracking-widest text-foreground">
-              VIBE<span className="text-accent">U</span>
-            </span>
+            <Logo className="h-10" linkToHome={false} />
             <p className="mt-4 text-sm text-text-muted">
               Sua universidade, sua vibe. A plataforma premium para eventos universitários.
             </p>
@@ -21,9 +21,12 @@ export function Footer() {
             </h4>
             <ul className="mt-4 space-y-2">
               <li>
-                <Link to={ROUTES.EVENTS} className="text-sm text-text-muted hover:text-foreground">
+                <NavScrollLink
+                  to={ROUTES.EVENTS}
+                  className="text-sm transition hover:text-foreground"
+                >
                   Eventos
-                </Link>
+                </NavScrollLink>
               </li>
               <li>
                 <Link to={ROUTES.LOGIN} className="text-sm text-text-muted hover:text-foreground">

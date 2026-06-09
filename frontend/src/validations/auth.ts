@@ -44,6 +44,26 @@ export const eventSchema = z.object({
   cidade: z.string().min(2, 'Cidade é obrigatória'),
   estado: z.string().length(2, 'UF deve ter 2 letras'),
   capacity: z.number({ error: 'Capacidade é obrigatória' }).min(1, 'Capacidade mínima é 1'),
+  faculdadeIds: z.array(z.string()).min(1, 'Selecione ao menos uma faculdade'),
+  atleticaIds: z.array(z.string()),
+  rulesText: z.string().optional(),
+  lots: z
+    .array(
+      z.object({
+        id: z.string().optional(),
+        name: z.string().min(1, 'Nome do lote é obrigatório'),
+        price: z.number({ error: 'Preço inválido' }).min(0),
+        quantity: z.number({ error: 'Quantidade inválida' }).min(1),
+      }),
+    )
+    .min(1, 'Adicione ao menos um lote'),
+  scheduleItems: z.array(
+    z.object({
+      time: z.string().min(1, 'Horário obrigatório'),
+      title: z.string().min(1, 'Título obrigatório'),
+      description: z.string().optional(),
+    }),
+  ),
 })
 
 export type LoginFormData = z.infer<typeof loginSchema>

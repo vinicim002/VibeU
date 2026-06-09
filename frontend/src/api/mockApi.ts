@@ -259,6 +259,64 @@ export async function fetchAtleticas(faculdadeId?: string): Promise<Atletica[]> 
   return list.sort((a, b) => a.nome.localeCompare(b.nome));
 }
 
+export async function fetchFaculdadeById(id: string): Promise<Faculdade> {
+  await delay(100);
+  const faculdade = getFaculdades().find((f) => f.id === id && f.status === "ATIVO");
+  if (!faculdade) throw new Error("Faculdade não encontrada");
+  return faculdade;
+}
+
+export async function fetchAtleticaById(id: string): Promise<Atletica> {
+  await delay(100);
+  const atletica = getAtleticas().find((a) => a.id === id && a.status === "ATIVO");
+  if (!atletica) throw new Error("Atlética não encontrada");
+  return atletica;
+}
+
+export async function fetchAllFaculdadesAdmin(): Promise<Faculdade[]> {
+  await delay(100);
+  return getFaculdades().sort((a, b) => a.sigla.localeCompare(b.sigla));
+}
+
+export async function fetchAllAtleticasAdmin(): Promise<Atletica[]> {
+  await delay(100);
+  return getAtleticas().sort((a, b) => a.nome.localeCompare(b.nome));
+}
+
+function saveFaculdades(faculdades: Faculdade[]): void {
+  setItem(STORAGE_KEYS.FACULDADES, faculdades);
+}
+
+function saveAtleticas(atleticas: Atletica[]): void {
+  setItem(STORAGE_KEYS.ATLETICAS, atleticas);
+}
+
+export async function updateFaculdadeStatus(
+  id: string,
+  status: Faculdade["status"],
+): Promise<Faculdade> {
+  await delay();
+  const list = getFaculdades();
+  const index = list.findIndex((f) => f.id === id);
+  if (index === -1) throw new Error("Faculdade não encontrada");
+  list[index] = { ...list[index], status };
+  saveFaculdades(list);
+  return list[index];
+}
+
+export async function updateAtleticaStatus(
+  id: string,
+  status: Atletica["status"],
+): Promise<Atletica> {
+  await delay();
+  const list = getAtleticas();
+  const index = list.findIndex((a) => a.id === id);
+  if (index === -1) throw new Error("Atlética não encontrada");
+  list[index] = { ...list[index], status };
+  saveAtleticas(list);
+  return list[index];
+}
+
 function getPublishedEvents(): Event[] {
   return getEvents().filter((e) => e.status === "PUBLICADO");
 }
@@ -455,6 +513,19 @@ export async function fetchOrganizerEvents(
     );
 }
 
+type LotInput = {
+  id?: string;
+  name: string;
+  price: number;
+  quantity: number;
+};
+
+type ScheduleInput = {
+  time: string;
+  title: string;
+  description?: string;
+};
+
 type CreateEventInput = Omit<
   Event,
   | "id"
@@ -470,7 +541,46 @@ type CreateEventInput = Omit<
   | "featured"
   | "popularityScore"
 > &
-  Partial<Pick<Event, "rules" | "faculdadeIds" | "atleticaIds" | "featured" | "popularityScore">>;
+  Partial<Pick<Event, "rules" | "faculdadeIds" | "atleticaIds" | "featured" | "popularityScore">> & {
+    lotsInput?: LotInput[];
+    scheduleInput?: ScheduleInput[];
+  };
+
+function buildLots(
+  date: string,
+  capacity: number,
+  lotsInput?: LotInput[],
+  existingLots: Event["lots"] = [],
+): Event["lots"] {
+  const inputs =
+    lotsInput && lotsInput.length > 0
+      ? lotsInput
+      : [{ name: "1º Lote", price: 0, quantity: capacity }];
+
+  return inputs.map((lot, index) => {
+    const existing = lot.id
+      ? existingLots.find((l) => l.id === lot.id)
+      : existingLots[index];
+    return {
+      id: existing?.id ?? generateId(),
+      name: lot.name,
+      price: lot.price,
+      quantity: lot.quantity,
+      sold: existing?.sold ?? 0,
+      startsAt: date,
+      endsAt: date,
+    };
+  });
+}
+
+function buildSchedule(scheduleInput?: ScheduleInput[]): Event["schedule"] {
+  return (scheduleInput ?? []).map((item) => ({
+    id: generateId(),
+    time: item.time,
+    title: item.title,
+    description: item.description,
+  }));
+}
 
 export async function createEvent(
   organizerId: string,
@@ -487,18 +597,8 @@ export async function createEvent(
     organizerId,
     organizerName: organizer.name,
     status: "RASCUNHO",
-    lots: [
-      {
-        id: generateId(),
-        name: "1º Lote",
-        price: 0,
-        quantity: data.capacity,
-        sold: 0,
-        startsAt: data.date,
-        endsAt: data.date,
-      },
-    ],
-    schedule: [],
+    lots: buildLots(data.date, data.capacity, data.lotsInput),
+    schedule: buildSchedule(data.scheduleInput),
     rules: data.rules ?? [],
     faculdadeIds: data.faculdadeIds ?? [],
     atleticaIds: data.atleticaIds ?? [],
@@ -522,6 +622,50 @@ export async function updateEvent(
   if (index === -1) throw new Error("Evento não encontrado");
 
   events[index] = { ...events[index], ...data };
+  saveEvents(events);
+  return events[index];
+}
+
+export async function fetchOrganizerEventById(
+  organizerId: string,
+  eventId: string,
+): Promise<Event> {
+  await delay();
+  const event = getEvents().find(
+    (e) => e.id === eventId && e.organizerId === organizerId,
+  );
+  if (!event) throw new Error("Evento não encontrado");
+  return event;
+}
+
+export async function updateOrganizerEvent(
+  organizerId: string,
+  eventId: string,
+  data: CreateEventInput,
+): Promise<Event> {
+  await delay();
+  const events = getEvents();
+  const index = events.findIndex(
+    (e) => e.id === eventId && e.organizerId === organizerId,
+  );
+  if (index === -1) throw new Error("Evento não encontrado");
+
+  const current = events[index];
+  if (current.status === "CANCELADO" || current.status === "ENCERRADO") {
+    throw new Error("Evento não pode ser editado");
+  }
+
+  events[index] = {
+    ...current,
+    ...data,
+    lots: buildLots(data.date, data.capacity, data.lotsInput, current.lots),
+    schedule: data.scheduleInput?.length
+      ? buildSchedule(data.scheduleInput)
+      : current.schedule,
+    rules: data.rules ?? current.rules,
+    faculdadeIds: data.faculdadeIds ?? current.faculdadeIds,
+    atleticaIds: data.atleticaIds ?? current.atleticaIds,
+  };
   saveEvents(events);
   return events[index];
 }

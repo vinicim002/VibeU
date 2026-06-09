@@ -26,10 +26,10 @@ export function EventFiltersBar({ onChange }: EventFiltersBarProps) {
   const [atleticaId, setAtleticaId] = useState(() => searchParams.get('atletica') ?? '')
   const [cidade, setCidade] = useState(() => searchParams.get('cidade') ?? '')
   const [estado, setEstado] = useState(() => searchParams.get('estado') ?? '')
-  const [dateFrom, setDateFrom] = useState('')
-  const [dateTo, setDateTo] = useState('')
-  const [priceMin, setPriceMin] = useState('')
-  const [priceMax, setPriceMax] = useState('')
+  const [dateFrom, setDateFrom] = useState(() => searchParams.get('de') ?? '')
+  const [dateTo, setDateTo] = useState(() => searchParams.get('ate') ?? '')
+  const [priceMin, setPriceMin] = useState(() => searchParams.get('precoMin') ?? '')
+  const [priceMax, setPriceMax] = useState(() => searchParams.get('precoMax') ?? '')
   const [advancedOpen, setAdvancedOpen] = useState(false)
 
   const { data: faculdades = [] } = useQuery({

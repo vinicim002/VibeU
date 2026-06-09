@@ -75,18 +75,22 @@ export function OrganizerDashboard() {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <p className="text-text-muted">Gerencie seus eventos universitários</p>
-        <Link to={ROUTES.ORGANIZER_CREATE_EVENT}>
-          <Button variant="accent">+ Novo evento</Button>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-sm text-text-muted sm:text-base">Gerencie seus eventos universitários</p>
+        <Link to={ROUTES.ORGANIZER_CREATE_EVENT} className="w-full sm:w-auto">
+          <Button variant="accent" className="w-full sm:w-auto">
+            + Novo evento
+          </Button>
         </Link>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-5">
         {statCards.map((stat) => (
-          <Card key={stat.label} className="p-5" glow>
-            <p className="text-xs uppercase tracking-wider text-text-muted">{stat.label}</p>
-            <p className="mt-2 font-display text-3xl text-foreground">{stat.value}</p>
+          <Card key={stat.label} className="p-4 sm:p-5" glow>
+            <p className="text-[10px] uppercase tracking-wider text-text-muted sm:text-xs">
+              {stat.label}
+            </p>
+            <p className="mt-2 font-display text-2xl text-foreground sm:text-3xl">{stat.value}</p>
           </Card>
         ))}
       </div>
@@ -104,16 +108,18 @@ export function OrganizerDashboard() {
       ) : (
         <div className="space-y-4">
           {events?.map((event) => (
-            <Card key={event.id} className="flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex items-center gap-4">
+            <Card key={event.id} className="flex flex-col gap-4 p-4 sm:p-6 lg:flex-row lg:items-center lg:justify-between">
+              <div className="flex min-w-0 items-start gap-3 sm:items-center sm:gap-4">
                 <img
                   src={event.bannerUrl}
                   alt=""
-                  className="h-16 w-16 rounded-xl object-cover"
+                  className="h-14 w-14 shrink-0 rounded-xl object-cover sm:h-16 sm:w-16"
                 />
-                <div>
-                  <h3 className="font-heading font-bold uppercase text-foreground">{event.name}</h3>
-                  <p className="text-sm text-text-muted">
+                <div className="min-w-0 flex-1">
+                  <h3 className="truncate font-heading font-bold uppercase text-foreground">
+                    {event.name}
+                  </h3>
+                  <p className="mt-1 text-xs text-text-muted sm:text-sm">
                     {formatDate(event.date)} • {event.location} • {event.cidade}/{event.estado}
                   </p>
                   <Badge
@@ -124,7 +130,14 @@ export function OrganizerDashboard() {
                   </Badge>
                 </div>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 lg:shrink-0 lg:justify-end">
+                {(event.status === 'RASCUNHO' || event.status === 'PUBLICADO') ? (
+                  <Link to={ROUTES.ORGANIZER_EDIT_EVENT.replace(':id', event.id)}>
+                    <Button size="sm" variant="secondary">
+                      Editar
+                    </Button>
+                  </Link>
+                ) : null}
                 {event.status === 'RASCUNHO' ? (
                   <>
                     <Button size="sm" onClick={() => publishMutation.mutate(event.id)}>

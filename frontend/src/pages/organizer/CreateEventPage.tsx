@@ -5,20 +5,15 @@ import { createEvent } from '@/api/mockApi'
 import { useAuth } from '@/contexts/AuthContext'
 import { EventForm } from '@/components/forms/EventForm'
 import { ROUTES } from '@/constants/routes'
+import { formDataToEventInput } from '@/utils/eventForm'
 import type { EventFormData } from '@/validations/auth'
-import type { EventCategory } from '@/types'
 
 export function CreateEventPage() {
   const { user } = useAuth()
   const navigate = useNavigate()
 
   const mutation = useMutation({
-    mutationFn: (data: EventFormData) =>
-      createEvent(user!.id, {
-        ...data,
-        category: data.category as EventCategory,
-        endTime: data.endTime,
-      }),
+    mutationFn: (data: EventFormData) => createEvent(user!.id, formDataToEventInput(data)),
     onSuccess: () => {
       toast.success('Evento criado como rascunho!')
       navigate(ROUTES.ORGANIZER_DASHBOARD)
@@ -27,12 +22,12 @@ export function CreateEventPage() {
   })
 
   return (
-    <div className="max-w-2xl">
-      <h2 className="font-heading text-2xl font-bold uppercase text-foreground">
+    <div className="mx-auto w-full max-w-3xl">
+      <h2 className="font-heading text-xl font-bold uppercase text-foreground sm:text-2xl">
         Novo evento
       </h2>
       <p className="mt-2 text-sm text-text-muted">
-        O evento será criado como rascunho. Publique quando estiver pronto.
+        Preencha os dados, associe faculdades e atléticas, configure lotes e publique quando estiver pronto.
       </p>
       <div className="mt-8">
         <EventForm

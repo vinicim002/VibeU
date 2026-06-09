@@ -1,14 +1,12 @@
 import { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
-import { toast } from 'react-toastify'
 import {
   fetchEventById,
   getAvailableLotSpots,
   getEventMinPrice,
   getEventSoldCount,
-  subscribeToEvent,
 } from '@/api/mockApi'
 import { useAuth } from '@/contexts/AuthContext'
 import { CATEGORY_LABELS, ROUTES } from '@/constants/routes'
@@ -23,7 +21,6 @@ export function EventDetailPage() {
   const { id } = useParams<{ id: string }>()
   const { user } = useAuth()
   const navigate = useNavigate()
-  const queryClient = useQueryClient()
   const [selectedLotId, setSelectedLotId] = useState<string>('')
 
   const { data: event, isPending, isError, refetch } = useQuery({
@@ -32,22 +29,6 @@ export function EventDetailPage() {
     enabled: !!id,
     staleTime: 0,
   })
-
-  const subscribeMutation = useMutation({
-    mutationFn: (lotId: string) => subscribeToEvent(user!.id, id!, lotId),
-    onSuccess: ({ ticket }) => {
-      toast.success('Inscrição confirmada! Seu ingresso foi gerado.')
-      navigate(ROUTES.TICKET.replace(':id', ticket.id))
-      queryClient.invalidateQueries({ queryKey: ['events'] })
-      queryClient.invalidateQueries({ queryKey: ['user-inscriptions'] })
-      queryClient.invalidateQueries({ queryKey: ['ticket'] })
-    },
-    onError: (err: Error) => toast.error(err.message),
-  })
-
-  if (subscribeMutation.isPending) {
-    return <LoadingState message="Processando inscrição..." />
-  }
 
   if (isPending) return <LoadingState message="Carregando evento..." />
   if (isError || !event) {
@@ -63,6 +44,7 @@ export function EventDetailPage() {
   const available = event.capacity - sold
   const minPrice = getEventMinPrice(event)
   const activeLot = selectedLotId || event.lots.find((l) => getAvailableLotSpots(l) > 0)?.id
+  const loginReturnPath = activeLot ? `/eventos/${id}?lot=${activeLot}` : `/eventos/${id}`
 
   return (
     <>
@@ -110,7 +92,7 @@ export function EventDetailPage() {
                   {event.faculdades.map((f) => (
                     <Link
                       key={f.id}
-                      to={`${ROUTES.EVENTS}?faculdade=${f.id}`}
+                      to={ROUTES.FACULDADE_DETAIL.replace(':id', f.id)}
                       className="flex items-center gap-3 rounded-xl border border-border/10 bg-surface/5 px-4 py-3 transition hover:border-secondary/50"
                     >
                       <img src={f.logo} alt="" className="h-10 w-10 rounded-full" />
@@ -133,7 +115,7 @@ export function EventDetailPage() {
                   {event.atleticas.map((a) => (
                     <Link
                       key={a.id}
-                      to={`${ROUTES.EVENTS}?atletica=${a.id}`}
+                      to={ROUTES.ATLETICA_DETAIL.replace(':id', a.id)}
                       className="flex items-start gap-3 rounded-xl border border-border/10 bg-surface/5 p-4 transition hover:border-accent/40"
                     >
                       <img src={a.logo} alt="" className="h-10 w-10 rounded-full" />
@@ -267,10 +249,13 @@ export function EventDetailPage() {
                   <Button
                     variant="ticket"
                     className="mt-6 w-full"
-                    disabled={!activeLot || subscribeMutation.isPending}
-                    isLoading={subscribeMutation.isPending}
+                    disabled={!activeLot}
                     onClick={() => {
-                      if (activeLot) subscribeMutation.mutate(activeLot)
+                      if (activeLot) {
+                        navigate(
+                          `${ROUTES.EVENT_CHECKOUT.replace(':id', id!)}?lot=${activeLot}`,
+                        )
+                      }
                     }}
                   >
                     Comprar Ingresso
@@ -281,7 +266,10 @@ export function EventDetailPage() {
                   </p>
                 )
               ) : (
-                <Link to={ROUTES.LOGIN} state={{ from: { pathname: `/eventos/${id}` } }}>
+                <Link
+                  to={ROUTES.LOGIN}
+                  state={{ from: { pathname: loginReturnPath } }}
+                >
                   <Button variant="ticket" className="mt-6 w-full">
                     Login para comprar
                   </Button>

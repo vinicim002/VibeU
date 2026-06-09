@@ -4,11 +4,12 @@ import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
 import { fetchEvents } from '@/api/mockApi'
 import { EventCard } from '@/components/event/EventCard'
+import { EventCardSkeleton } from '@/components/ui/EventCardSkeleton'
 import { EventFiltersBar } from '@/components/event/EventFiltersBar'
 import { EventSpotlight } from '@/components/event/EventSpotlight'
-import { LoadingState } from '@/components/ui/LoadingState'
 import { EmptyState } from '@/components/ui/EmptyState'
 import { ErrorState } from '@/components/ui/ErrorState'
+import { filtersToSearchParams, searchParamsToFilters } from '@/utils/eventFilters'
 import type { EventFilters } from '@/types'
 
 const SORT_OPTIONS = [
@@ -21,19 +22,17 @@ const SORT_OPTIONS = [
 type SortValue = (typeof SORT_OPTIONS)[number]['value']
 
 export function EventsPage() {
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [sort, setSort] = useState<SortValue>('date')
-  const [filters, setFilters] = useState<EventFilters>({
-    category: searchParams.get('category') ?? undefined,
-    faculdadeId: searchParams.get('faculdade') ?? undefined,
-    atleticaId: searchParams.get('atletica') ?? undefined,
-    cidade: searchParams.get('cidade') ?? undefined,
-    estado: searchParams.get('estado') ?? undefined,
-    search: searchParams.get('search') ?? undefined,
-  })
-  const handleFilters = useCallback((f: EventFilters) => {
-    setFilters((prev) => ({ ...prev, ...f }))
-  }, [])
+  const [filters, setFilters] = useState<EventFilters>(() => searchParamsToFilters(searchParams))
+
+  const handleFilters = useCallback(
+    (f: EventFilters) => {
+      setFilters(f)
+      setSearchParams(filtersToSearchParams(f), { replace: true })
+    },
+    [setSearchParams],
+  )
 
   const { data: events, isLoading, isError, refetch } = useQuery({
     queryKey: ['events', filters],
@@ -108,7 +107,11 @@ export function EventsPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         {isLoading ? (
-          <LoadingState message="Carregando eventos..." />
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <EventCardSkeleton key={i} />
+            ))}
+          </div>
         ) : isError ? (
           <ErrorState onRetry={() => refetch()} />
         ) : sortedEvents.length === 0 ? (

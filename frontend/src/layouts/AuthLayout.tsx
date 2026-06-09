@@ -1,6 +1,6 @@
-import { Link, Outlet } from 'react-router-dom'
-import { ROUTES } from '@/constants/routes'
+import { Outlet } from 'react-router-dom'
 import { ThemeToggle } from '@/components/common/ThemeToggle'
+import { Logo } from '@/components/common/Logo'
 
 export function AuthLayout() {
   return (
@@ -16,7 +16,7 @@ export function AuthLayout() {
         />
         <div className="gradient-overlay absolute inset-0" />
         <div className="absolute inset-0 flex flex-col justify-end p-12">
-          <span className="font-display text-8xl leading-none text-on-media/10">VIBEU</span>
+          <Logo className="h-16 brightness-0 invert opacity-20" linkToHome={false} />
           <p className="mt-4 font-heading text-2xl uppercase text-on-media">
             Sua universidade, sua vibe.
           </p>
@@ -24,9 +24,9 @@ export function AuthLayout() {
       </div>
 
       <div className="flex flex-col justify-center px-6 py-12 sm:px-12">
-        <Link to={ROUTES.HOME} className="mb-8 font-display text-3xl tracking-widest text-foreground">
-          VIBE<span className="text-accent">U</span>
-        </Link>
+        <div className="mb-8">
+          <Logo className="h-10" />
+        </div>
         <Outlet />
       </div>
     </div>

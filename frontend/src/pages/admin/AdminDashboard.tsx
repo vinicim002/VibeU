@@ -24,6 +24,7 @@ import { Card } from '@/components/ui/Card'
 import { LoadingState } from '@/components/ui/LoadingState'
 import { Badge } from '@/components/ui/Badge'
 import { EVENT_STATUS_LABELS } from '@/constants/routes'
+import { AdminInstitutions } from '@/pages/admin/AdminInstitutions'
 
 const COLORS = ['#6D28D9', '#3B82F6', '#EC4899', '#E2FF00', '#8B5CF6']
 
@@ -76,20 +77,22 @@ export function AdminDashboard() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
           >
-            <Card className="p-6" glow>
+            <Card className="p-4 sm:p-6" glow>
               <p className="text-xs uppercase tracking-wider text-text-muted">{stat.label}</p>
-              <p className={`mt-2 font-display text-4xl ${stat.color}`}>{stat.value}</p>
+              <p className={`mt-2 font-display text-2xl sm:text-3xl lg:text-4xl ${stat.color}`}>
+                {stat.value}
+              </p>
             </Card>
           </motion.div>
         ))}
       </div>
 
       <div className="grid gap-8 lg:grid-cols-2">
-        <Card className="p-6">
+        <Card className="p-4 sm:p-6">
           <h3 className="font-heading text-sm font-bold uppercase text-foreground">
             Receita mensal
           </h3>
-          <div className="mt-4 h-64">
+          <div className="mt-4 h-52 sm:h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={revenue}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
@@ -105,11 +108,11 @@ export function AdminDashboard() {
           </div>
         </Card>
 
-        <Card className="p-6">
+        <Card className="p-4 sm:p-6">
           <h3 className="font-heading text-sm font-bold uppercase text-foreground">
             Eventos por categoria
           </h3>
-          <div className="mt-4 h-64">
+          <div className="mt-4 h-52 sm:h-64">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -132,10 +135,10 @@ export function AdminDashboard() {
         </Card>
       </div>
 
-      <Card className="p-6">
+      <Card className="p-4 sm:p-6">
         <h3 className="font-heading text-sm font-bold uppercase text-foreground">Todos os eventos</h3>
-        <div className="mt-4 overflow-x-auto">
-          <table className="w-full text-left text-sm">
+        <div className="mt-4 -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+          <table className="min-w-[640px] w-full text-left text-sm">
             <thead>
               <tr className="border-b border-border/10 text-text-muted">
                 <th className="pb-3 pr-4">Nome</th>
@@ -162,10 +165,10 @@ export function AdminDashboard() {
         </div>
       </Card>
 
-      <Card className="p-6">
+      <Card className="p-4 sm:p-6">
         <h3 className="font-heading text-sm font-bold uppercase text-foreground">Usuários</h3>
-        <div className="mt-4 overflow-x-auto">
-          <table className="w-full text-left text-sm">
+        <div className="mt-4 -mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+          <table className="min-w-[560px] w-full text-left text-sm">
             <thead>
               <tr className="border-b border-border/10 text-text-muted">
                 <th className="pb-3 pr-4">Nome</th>
@@ -187,6 +190,13 @@ export function AdminDashboard() {
           </table>
         </div>
       </Card>
+
+      <div>
+        <h3 className="mb-6 font-heading text-sm font-bold uppercase text-foreground">
+          Instituições
+        </h3>
+        <AdminInstitutions />
+      </div>
     </div>
   )
 }

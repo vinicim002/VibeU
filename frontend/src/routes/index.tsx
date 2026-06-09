@@ -1,4 +1,5 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { ScrollRestoration } from '@/components/common/ScrollRestoration'
 import { ProtectedRoute } from '@/components/common/ProtectedRoute'
 import { RequireAuth } from '@/components/common/RequireAuth'
 import { MainLayout } from '@/layouts/MainLayout'
@@ -16,16 +17,25 @@ import { TicketPage } from '@/pages/TicketPage'
 import { AdminDashboard } from '@/pages/admin/AdminDashboard'
 import { OrganizerDashboard } from '@/pages/organizer/OrganizerDashboard'
 import { CreateEventPage } from '@/pages/organizer/CreateEventPage'
+import { EditEventPage } from '@/pages/organizer/EditEventPage'
 import { ParticipantDashboard } from '@/pages/participant/ParticipantDashboard'
+import { NotFoundPage } from '@/pages/NotFoundPage'
+import { CheckoutPage } from '@/pages/CheckoutPage'
+import { FaculdadeDetailPage } from '@/pages/FaculdadeDetailPage'
+import { AtleticaDetailPage } from '@/pages/AtleticaDetailPage'
 
 export function AppRoutes() {
   return (
     <BrowserRouter>
+      <ScrollRestoration />
       <Routes>
         <Route element={<MainLayout />}>
           <Route path={ROUTES.HOME} element={<HomePage />} />
           <Route path={ROUTES.EVENTS} element={<EventsPage />} />
           <Route path={ROUTES.EVENT_DETAIL} element={<EventDetailPage />} />
+          <Route path={ROUTES.EVENT_CHECKOUT} element={<CheckoutPage />} />
+          <Route path={ROUTES.FACULDADE_DETAIL} element={<FaculdadeDetailPage />} />
+          <Route path={ROUTES.ATLETICA_DETAIL} element={<AtleticaDetailPage />} />
           <Route
             path={ROUTES.PROFILE}
             element={
@@ -87,6 +97,20 @@ export function AppRoutes() {
           >
             <Route index element={<CreateEventPage />} />
           </Route>
+          <Route
+            path={ROUTES.ORGANIZER_EDIT_EVENT}
+            element={
+              <DashboardLayout
+                title="ORGANIZADOR"
+                navItems={[
+                  { to: ROUTES.ORGANIZER_DASHBOARD, label: 'Meus Eventos' },
+                  { to: ROUTES.ORGANIZER_CREATE_EVENT, label: 'Novo Evento' },
+                ]}
+              />
+            }
+          >
+            <Route index element={<EditEventPage />} />
+          </Route>
         </Route>
 
         <Route element={<ProtectedRoute roles={['PARTICIPANTE']} />}>
@@ -106,7 +130,7 @@ export function AppRoutes() {
           </Route>
         </Route>
 
-        <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   )

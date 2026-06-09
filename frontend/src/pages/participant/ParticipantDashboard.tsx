@@ -73,24 +73,24 @@ export function ParticipantDashboard() {
 
   return (
     <div className="space-y-8">
-      <div className="grid gap-4 sm:grid-cols-3">
-        <Card className="p-5" glow>
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
+        <Card className="p-4 sm:p-5" glow>
           <p className="text-xs uppercase text-text-muted">Inscrições ativas</p>
-          <p className="font-display text-4xl text-accent">{active.length}</p>
+          <p className="font-display text-3xl text-accent sm:text-4xl">{active.length}</p>
         </Card>
-        <Card className="p-5" glow>
+        <Card className="p-4 sm:p-5" glow>
           <p className="text-xs uppercase text-text-muted">Ingressos</p>
-          <p className="font-display text-4xl text-accent-yellow">
+          <p className="font-display text-3xl text-accent-yellow sm:text-4xl">
             {active.filter((i) => i.ticket?.status === 'ATIVO').length}
           </p>
         </Card>
-        <Card className="p-5" glow>
+        <Card className="p-4 sm:p-5" glow>
           <p className="text-xs uppercase text-text-muted">Histórico</p>
-          <p className="font-display text-4xl text-text-muted">{history.length}</p>
+          <p className="font-display text-3xl text-text-muted sm:text-4xl">{history.length}</p>
         </Card>
       </div>
 
-      <Card className="p-6">
+      <Card className="p-4 sm:p-6">
         <h3 className="font-heading text-sm font-bold uppercase text-foreground">
           Simular check-in
         </h3>
@@ -115,18 +115,18 @@ export function ParticipantDashboard() {
       </Card>
 
       <section>
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-xs font-bold tracking-[0.3em] text-accent uppercase">
               Wallet
             </p>
-            <h3 className="font-display text-3xl tracking-wider text-foreground sm:text-4xl">
+            <h3 className="font-display text-2xl tracking-wider text-foreground sm:text-3xl md:text-4xl">
               MEUS INGRESSOS
             </h3>
           </div>
           <Link
             to={ROUTES.EVENTS}
-            className="inline-flex items-center justify-center rounded-full border border-border/20 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-foreground transition hover:border-border/40 hover:bg-surface/5"
+            className="inline-flex w-full items-center justify-center rounded-full border border-border/20 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-foreground transition hover:border-border/40 hover:bg-surface/5 sm:w-auto"
           >
             + Novo evento
           </Link>

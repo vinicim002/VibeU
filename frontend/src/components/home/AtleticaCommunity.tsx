@@ -41,7 +41,7 @@ export function AtleticaCommunity() {
               transition={{ delay: i * 0.07 }}
             >
               <Link
-                to={`${ROUTES.EVENTS}?atletica=${atl.id}`}
+                to={ROUTES.ATLETICA_DETAIL.replace(':id', atl.id)}
                 className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/10 bg-bg-slate p-6 transition duration-300 hover:border-accent/40 hover:shadow-[0_0_32px_rgba(236,72,153,0.15)]"
               >
                 <div className="absolute top-0 right-0 h-24 w-24 rounded-bl-[4rem] bg-gradient-to-bl from-accent/20 to-transparent" />
