@@ -18,6 +18,7 @@ export const ROUTES = {
 } as const
 
 export const STORAGE_KEYS = {
+  TOKEN: 'vibeu_token',
   USERS: 'vibeu_users',
   SESSION: 'vibeu_session',
   EVENTS: 'vibeu_events',

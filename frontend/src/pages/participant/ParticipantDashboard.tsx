@@ -6,7 +6,7 @@ import {
   cancelInscription,
   fetchUserInscriptions,
   performCheckIn,
-} from '@/api/mockApi'
+} from '@/api'
 import { useAuth } from '@/contexts/AuthContext'
 import { ROUTES } from '@/constants/routes'
 import { formatDate } from '@/utils/format'

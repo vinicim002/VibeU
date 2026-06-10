@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
-import { fetchEvents } from '@/api/mockApi'
+import { fetchEvents } from '@/api'
 import { HeroSection } from '@/components/common/HeroSection'
 import { MarqueeTicker } from '@/components/common/MarqueeTicker'
 import { EventCard } from '@/components/event/EventCard'
@@ -19,9 +19,11 @@ export function HomePage() {
   })
 
   const featured = events?.filter((e) => e.featured).slice(0, 4) ?? []
-  const popular = [...(events ?? [])]
-    .sort((a, b) => b.popularityScore - a.popularityScore)
-    .slice(0, 3)
+  const markedPopular = events?.filter((e) => e.popular) ?? []
+  const popular =
+    markedPopular.length > 0
+      ? markedPopular.slice(0, 3)
+      : [...(events ?? [])].sort((a, b) => b.popularityScore - a.popularityScore).slice(0, 3)
   const upcoming = events?.slice(0, 4) ?? []
 
   return (

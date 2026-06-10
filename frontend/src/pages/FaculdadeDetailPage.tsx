@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
-import { fetchEvents, fetchFaculdadeById } from '@/api/mockApi'
+import { fetchEvents, fetchFaculdadeById } from '@/api'
 import { EventCard } from '@/components/event/EventCard'
 import { EventCardSkeleton } from '@/components/ui/EventCardSkeleton'
 import { EmptyState } from '@/components/ui/EmptyState'

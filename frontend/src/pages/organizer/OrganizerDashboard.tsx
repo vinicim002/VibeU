@@ -7,7 +7,7 @@ import {
   fetchOrganizerEvents,
   fetchOrganizerStats,
   publishEvent,
-} from '@/api/mockApi'
+} from '@/api'
 import { useAuth } from '@/contexts/AuthContext'
 import { ROUTES, EVENT_STATUS_LABELS } from '@/constants/routes'
 import { formatCurrency, formatDate } from '@/utils/format'

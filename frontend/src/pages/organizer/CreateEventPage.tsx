@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
-import { createEvent } from '@/api/mockApi'
+import { createEvent } from '@/api'
 import { useAuth } from '@/contexts/AuthContext'
 import { EventForm } from '@/components/forms/EventForm'
 import { ROUTES } from '@/constants/routes'

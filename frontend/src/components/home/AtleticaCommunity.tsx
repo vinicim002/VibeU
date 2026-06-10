@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
-import { fetchAtleticasWithStats } from '@/api/mockApi'
+import { fetchAtleticasWithStats } from '@/api'
 import { formatDate } from '@/utils/format'
 import { ROUTES } from '@/constants/routes'
 
@@ -55,6 +55,11 @@ export function AtleticaCommunity() {
                   <div className="min-w-0 flex-1">
                     <p className="font-heading text-base font-bold uppercase tracking-wide text-foreground group-hover:text-accent">
                       {atl.nome}
+                      {atl.featured ? (
+                        <span className="ml-2 text-[10px] font-normal tracking-wider text-accent uppercase">
+                          Destaque
+                        </span>
+                      ) : null}
                     </p>
                     <span className="mt-1 inline-block rounded-full bg-secondary/20 px-2.5 py-0.5 text-[10px] font-bold tracking-wider text-secondary uppercase">
                       {atl.faculdadeSigla}

@@ -72,6 +72,7 @@ function normalizeEvent(event: Event): Event {
     estado: event.estado ?? "SP",
     rules: event.rules ?? [],
     featured: event.featured ?? false,
+    popular: event.popular ?? false,
     popularityScore: event.popularityScore ?? 0,
   };
 }

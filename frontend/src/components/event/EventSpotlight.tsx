@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import type { EventWithRelations } from '@/types'
 import { CATEGORY_LABELS, ROUTES } from '@/constants/routes'
-import { getEventMinPrice } from '@/api/mockApi'
+import { getEventMinPrice } from '@/api'
 import { formatCurrency, formatDateLong, formatTime } from '@/utils/format'
 import { Badge } from '@/components/ui/Badge'
 

@@ -52,7 +52,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
       <Input
         label="Senha"
         type="password"
-        placeholder="••••••"
+        placeholder="Mín. 8 caracteres, maiúscula, minúscula e número"
         error={errors.password?.message}
         {...register('password')}
       />

@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react'
 import type { SessionUser } from '@/types'
-import * as api from '@/api/mockApi'
+import * as api from '@/api'
 
 interface AuthContextValue {
   user: SessionUser | null

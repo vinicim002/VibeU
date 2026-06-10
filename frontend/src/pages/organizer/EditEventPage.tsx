@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
-import { fetchOrganizerEventById, updateOrganizerEvent } from '@/api/mockApi'
+import { fetchOrganizerEventById, updateOrganizerEvent } from '@/api'
 import { useAuth } from '@/contexts/AuthContext'
 import { EventForm } from '@/components/forms/EventForm'
 import { LoadingState } from '@/components/ui/LoadingState'

@@ -32,6 +32,7 @@ export interface Faculdade {
   estado: string
   logo: string
   status: EntityStatus
+  featured: boolean
 }
 
 export interface Atletica {
@@ -42,6 +43,7 @@ export interface Atletica {
   descricao: string
   faculdadeId: string
   status: EntityStatus
+  featured: boolean
 }
 
 export interface User {
@@ -95,6 +97,7 @@ export interface Event {
   schedule: ScheduleItem[]
   rules: string[]
   featured: boolean
+  popular: boolean
   popularityScore: number
   createdAt: string
 }
@@ -181,12 +184,18 @@ export interface SessionUser {
 }
 
 export interface DashboardStats {
-  totalEvents: number
   totalUsers: number
-  totalInscriptions: number
-  totalRevenue: number
-  activeTickets: number
-  checkInsToday: number
+  totalOrganizers: number
+  totalParticipants: number
+  totalEvents: number
+  activeEvents: number
+  closedEvents: number
   totalFaculdades: number
   totalAtleticas: number
+  ticketsIssued: number
+}
+
+export interface ChartItem {
+  name: string
+  value: number
 }

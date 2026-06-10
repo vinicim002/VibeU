@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { fetchTicketById } from '@/api/mockApi'
+import { fetchTicketById } from '@/api'
 import { TicketPass } from '@/components/ticket/TicketPass'
 import { LoadingState } from '@/components/ui/LoadingState'
 import { ErrorState } from '@/components/ui/ErrorState'

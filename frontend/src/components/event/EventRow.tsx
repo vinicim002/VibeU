@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import type { EventWithRelations } from '@/types'
-import { getEventMinPrice, getEventSoldCount } from '@/api/mockApi'
+import { getEventMinPrice, getEventSoldCount } from '@/api'
 import { formatCurrency, formatDate } from '@/utils/format'
 import { Badge } from '@/components/ui/Badge'
 import { ROUTES } from '@/constants/routes'

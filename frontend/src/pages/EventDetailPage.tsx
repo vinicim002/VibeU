@@ -7,7 +7,7 @@ import {
   getAvailableLotSpots,
   getEventMinPrice,
   getEventSoldCount,
-} from '@/api/mockApi'
+} from '@/api'
 import { useAuth } from '@/contexts/AuthContext'
 import { CATEGORY_LABELS, ROUTES } from '@/constants/routes'
 import { formatCurrency, formatDateLong, formatTime } from '@/utils/format'

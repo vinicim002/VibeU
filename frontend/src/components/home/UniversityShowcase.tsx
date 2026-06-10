@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
-import { fetchFaculdadesWithStats } from '@/api/mockApi'
+import { fetchFaculdadesWithStats } from '@/api'
 import { ROUTES } from '@/constants/routes'
 
 const CARD_GRADIENTS = [
@@ -44,7 +44,6 @@ export function UniversityShowcase() {
 
       <div className="flex gap-5 overflow-x-auto pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-3 lg:overflow-visible xl:grid-cols-5">
         {faculdades.map((fac, i) => {
-          const isTrending = i < 3
           const gradient = CARD_GRADIENTS[i % CARD_GRADIENTS.length]
 
           return (
@@ -71,7 +70,7 @@ export function UniversityShowcase() {
                     alt=""
                     className="h-14 w-14 rounded-2xl border border-border/20 bg-surface/10 object-cover shadow-lg"
                   />
-                  {isTrending ? (
+                  {fac.featured ? (
                     <span className="rounded-full bg-accent-yellow/20 px-2.5 py-1 text-[10px] font-bold tracking-wider text-accent-yellow uppercase">
                       Em alta
                     </span>

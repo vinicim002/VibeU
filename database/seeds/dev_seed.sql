@@ -1,6 +1,6 @@
--- Dados iniciais para desenvolvimento local.
--- Executar manualmente após migrations:
---   docker exec -i vibeu-postgres psql -U vibeu -d vibeu < database/seeds/dev_seed.sql
-
--- Exemplo (descomente quando houver tabelas de domínio):
--- INSERT INTO users (email, name) VALUES ('dev@vibeu.local', 'Desenvolvedor');
+-- Seed de desenvolvimento é aplicado automaticamente via DataSeeder (Java).
+-- Credenciais padrão (senhas seguem RN02):
+--
+--   admin@vibeu.edu  / Admin123   (ADMINISTRADOR)
+--   org@vibeu.edu    / Org12345   (ORGANIZADOR)
+--   part@vibeu.edu   / Part1234   (PARTICIPANTE)

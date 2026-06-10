@@ -1,13 +1,14 @@
 {
   "Servers": {
     "1": {
-      "Name": "VibeU",
+      "Name": "VibeU PostgreSQL",
       "Group": "Development",
       "Host": "postgres",
       "Port": 5432,
       "MaintenanceDB": "vibeu",
       "Username": "vibeu",
-      "SSLMode": "prefer"
+      "SSLMode": "prefer",
+      "PassFile": "/var/lib/pgadmin/pgpass"
     }
   }
 }

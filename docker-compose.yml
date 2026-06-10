@@ -83,7 +83,10 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    entrypoint: ["/bin/sh", "/custom-init/init-pgpass.sh"]
     environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
       PGADMIN_CONFIG_SERVER_MODE: "False"
@@ -95,6 +98,7 @@ services:
     volumes:
       - vibeu_pgadmin_data:/var/lib/pgadmin
       - ./docker/pgadmin/servers.json:/pgadmin4/servers.json:ro
+      - ./docker/pgadmin/init-pgpass.sh:/custom-init/init-pgpass.sh:ro
     depends_on:
       postgres:
         condition: service_healthy

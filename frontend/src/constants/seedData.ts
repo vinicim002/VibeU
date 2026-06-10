@@ -10,20 +10,20 @@ const logo = (sigla: string) =>
   `https://ui-avatars.com/api/?name=${encodeURIComponent(sigla)}&background=6D28D9&color=fff&size=128&bold=true`
 
 export const seedFaculdades: Faculdade[] = [
-  { id: 'fac-usp', nome: 'Universidade de São Paulo', sigla: 'USP', cidade: 'São Paulo', estado: 'SP', logo: logo('USP'), status: 'ATIVO' },
-  { id: 'fac-unesp', nome: 'Universidade Estadual Paulista', sigla: 'UNESP', cidade: 'São Paulo', estado: 'SP', logo: logo('UNESP'), status: 'ATIVO' },
-  { id: 'fac-unicamp', nome: 'Universidade Estadual de Campinas', sigla: 'UNICAMP', cidade: 'Campinas', estado: 'SP', logo: logo('UNICAMP'), status: 'ATIVO' },
-  { id: 'fac-ufmg', nome: 'Universidade Federal de Minas Gerais', sigla: 'UFMG', cidade: 'Belo Horizonte', estado: 'MG', logo: logo('UFMG'), status: 'ATIVO' },
-  { id: 'fac-puc', nome: 'PUC-SP', sigla: 'PUC', cidade: 'São Paulo', estado: 'SP', logo: logo('PUC'), status: 'ATIVO' },
+  { id: 'fac-usp', nome: 'Universidade de São Paulo', sigla: 'USP', cidade: 'São Paulo', estado: 'SP', logo: logo('USP'), status: 'ATIVO', featured: true },
+  { id: 'fac-unesp', nome: 'Universidade Estadual Paulista', sigla: 'UNESP', cidade: 'São Paulo', estado: 'SP', logo: logo('UNESP'), status: 'ATIVO', featured: false },
+  { id: 'fac-unicamp', nome: 'Universidade Estadual de Campinas', sigla: 'UNICAMP', cidade: 'Campinas', estado: 'SP', logo: logo('UNICAMP'), status: 'ATIVO', featured: true },
+  { id: 'fac-ufmg', nome: 'Universidade Federal de Minas Gerais', sigla: 'UFMG', cidade: 'Belo Horizonte', estado: 'MG', logo: logo('UFMG'), status: 'ATIVO', featured: true },
+  { id: 'fac-puc', nome: 'PUC-SP', sigla: 'PUC', cidade: 'São Paulo', estado: 'SP', logo: logo('PUC'), status: 'ATIVO', featured: false },
 ]
 
 export const seedAtleticas: Atletica[] = [
-  { id: 'atl-aaa-med-usp', nome: 'AAA Medicina USP', sigla: 'AAA Med USP', logo: logo('AAA'), descricao: 'Atlética Acadêmica de Medicina da USP', faculdadeId: 'fac-usp', status: 'ATIVO' },
-  { id: 'atl-aaa-med-unesp', nome: 'AAA Medicina UNESP', sigla: 'AAA Med UNESP', logo: logo('AAA'), descricao: 'Atlética Acadêmica de Medicina da UNESP', faculdadeId: 'fac-unesp', status: 'ATIVO' },
-  { id: 'atl-eng-unicamp', nome: 'Atlética de Engenharia UNICAMP', sigla: 'ATL Eng', logo: logo('ENG'), descricao: 'Atlética dos cursos de Engenharia', faculdadeId: 'fac-unicamp', status: 'ATIVO' },
-  { id: 'atl-imperial-ufmg', nome: 'Imperial Atlética UFMG', sigla: 'Imperial', logo: logo('IMP'), descricao: 'Uma das maiores atléticas do Brasil', faculdadeId: 'fac-ufmg', status: 'ATIVO' },
-  { id: 'atl-puc-social', nome: 'Atlética Ciências Sociais PUC', sigla: 'ATL PUC', logo: logo('PUC'), descricao: 'Atlética de Ciências Sociais', faculdadeId: 'fac-puc', status: 'ATIVO' },
-  { id: 'atl-inter-usp-unesp', nome: 'Liga InterAtlética USP-UNESP', sigla: 'InterLiga', logo: logo('INT'), descricao: 'Parceria entre atléticas USP e UNESP', faculdadeId: 'fac-usp', status: 'ATIVO' },
+  { id: 'atl-aaa-med-usp', nome: 'AAA Medicina USP', sigla: 'AAA Med USP', logo: logo('AAA'), descricao: 'Atlética Acadêmica de Medicina da USP', faculdadeId: 'fac-usp', status: 'ATIVO', featured: true },
+  { id: 'atl-aaa-med-unesp', nome: 'AAA Medicina UNESP', sigla: 'AAA Med UNESP', logo: logo('AAA'), descricao: 'Atlética Acadêmica de Medicina da UNESP', faculdadeId: 'fac-unesp', status: 'ATIVO', featured: false },
+  { id: 'atl-eng-unicamp', nome: 'Atlética de Engenharia UNICAMP', sigla: 'ATL Eng', logo: logo('ENG'), descricao: 'Atlética dos cursos de Engenharia', faculdadeId: 'fac-unicamp', status: 'ATIVO', featured: true },
+  { id: 'atl-imperial-ufmg', nome: 'Imperial Atlética UFMG', sigla: 'Imperial', logo: logo('IMP'), descricao: 'Uma das maiores atléticas do Brasil', faculdadeId: 'fac-ufmg', status: 'ATIVO', featured: true },
+  { id: 'atl-puc-social', nome: 'Atlética Ciências Sociais PUC', sigla: 'ATL PUC', logo: logo('PUC'), descricao: 'Atlética de Ciências Sociais', faculdadeId: 'fac-puc', status: 'ATIVO', featured: false },
+  { id: 'atl-inter-usp-unesp', nome: 'Liga InterAtlética USP-UNESP', sigla: 'InterLiga', logo: logo('INT'), descricao: 'Parceria entre atléticas USP e UNESP', faculdadeId: 'fac-usp', status: 'ATIVO', featured: false },
 ]
 
 export const seedUsers: User[] = [
@@ -46,7 +46,7 @@ export const seedEvents: Event[] = [
     capacity: 500, organizerId: ORGANIZER_ID, organizerName: 'Carlos Organizador', status: 'PUBLICADO',
     faculdadeIds: ['fac-usp', 'fac-puc'],
     atleticaIds: ['atl-aaa-med-usp', 'atl-puc-social'],
-    featured: true, popularityScore: 950,
+    featured: true, popular: true, popularityScore: 950,
     lots: [
       { id: 'lot-summer-early', name: '1º Lote — Early Bird', price: 45, quantity: 150, sold: 98, startsAt: '2026-06-01', endsAt: '2026-06-30' },
       { id: 'lot-summer-regular', name: '2º Lote — Regular', price: 65, quantity: 200, sold: 45, startsAt: '2026-07-01', endsAt: '2026-07-14' },
@@ -73,7 +73,7 @@ export const seedEvents: Event[] = [
     capacity: 2000, organizerId: ORGANIZER_ID, organizerName: 'Carlos Organizador', status: 'PUBLICADO',
     faculdadeIds: ['fac-usp', 'fac-unesp'],
     atleticaIds: ['atl-aaa-med-usp', 'atl-aaa-med-unesp', 'atl-inter-usp-unesp'],
-    featured: true, popularityScore: 1200,
+    featured: true, popular: true, popularityScore: 1200,
     lots: [
       { id: 'lot-medfolia-1', name: '1º Lote', price: 80, quantity: 800, sold: 520, startsAt: '2026-10-01', endsAt: '2027-01-31' },
       { id: 'lot-medfolia-2', name: '2º Lote', price: 110, quantity: 800, sold: 180, startsAt: '2027-02-01', endsAt: '2027-03-19' },
@@ -100,7 +100,7 @@ export const seedEvents: Event[] = [
     capacity: 800, organizerId: ORGANIZER_ID, organizerName: 'Carlos Organizador', status: 'PUBLICADO',
     faculdadeIds: ['fac-unicamp'],
     atleticaIds: ['atl-eng-unicamp'],
-    featured: false, popularityScore: 680,
+    featured: false, popular: false, popularityScore: 680,
     lots: [{ id: 'lot-recepcao-free', name: 'Ingresso Gratuito', price: 0, quantity: 800, sold: 320, startsAt: '2026-06-01', endsAt: '2026-08-20' }],
     schedule: [
       { id: 'sch-recepcao-1', time: '18:00', title: 'Credenciamento' },
@@ -123,7 +123,7 @@ export const seedEvents: Event[] = [
     capacity: 300, organizerId: ORGANIZER_ID, organizerName: 'Carlos Organizador', status: 'PUBLICADO',
     faculdadeIds: ['fac-ufmg', 'fac-usp'],
     atleticaIds: ['atl-imperial-ufmg', 'atl-inter-usp-unesp'],
-    featured: true, popularityScore: 820,
+    featured: true, popular: true, popularityScore: 820,
     lots: [
       { id: 'lot-esportivo-geral', name: 'Arquibancada', price: 20, quantity: 250, sold: 87, startsAt: '2026-06-01', endsAt: '2026-09-09' },
       { id: 'lot-esportivo-vip', name: 'VIP Lounge', price: 50, quantity: 50, sold: 22, startsAt: '2026-06-01', endsAt: '2026-09-09' },
@@ -149,7 +149,7 @@ export const seedEvents: Event[] = [
     capacity: 200, organizerId: ORGANIZER_ID, organizerName: 'Carlos Organizador', status: 'PUBLICADO',
     faculdadeIds: ['fac-usp', 'fac-unesp', 'fac-puc'],
     atleticaIds: ['atl-aaa-med-usp'],
-    featured: false, popularityScore: 450,
+    featured: false, popular: false, popularityScore: 450,
     lots: [
       { id: 'lot-academico-estudante', name: 'Estudante', price: 15, quantity: 150, sold: 45, startsAt: '2026-06-01', endsAt: '2026-10-04' },
       { id: 'lot-academico-visitante', name: 'Visitante', price: 30, quantity: 50, sold: 8, startsAt: '2026-06-01', endsAt: '2026-10-04' },
@@ -175,7 +175,7 @@ export const seedEvents: Event[] = [
     capacity: 400, organizerId: ORGANIZER_ID, organizerName: 'Carlos Organizador', status: 'PUBLICADO',
     faculdadeIds: ['fac-unicamp'],
     atleticaIds: ['atl-eng-unicamp'],
-    featured: true, popularityScore: 780,
+    featured: true, popular: false, popularityScore: 780,
     lots: [
       { id: 'lot-neon-pista', name: 'Pista', price: 35, quantity: 300, sold: 156, startsAt: '2026-06-01', endsAt: '2026-11-21' },
       { id: 'lot-neon-front', name: 'Front Stage', price: 70, quantity: 100, sold: 67, startsAt: '2026-06-01', endsAt: '2026-11-21' },
@@ -191,7 +191,7 @@ export const seedEvents: Event[] = [
 ]
 
 export const DEMO_CREDENTIALS = [
-  { role: 'Administrador', email: 'admin@vibeu.edu', password: 'admin123' },
-  { role: 'Organizador', email: 'org@vibeu.edu', password: 'org123' },
-  { role: 'Participante', email: 'part@vibeu.edu', password: 'part123' },
+  { role: 'Administrador', email: 'admin@vibeu.edu', password: 'Admin123' },
+  { role: 'Organizador', email: 'org@vibeu.edu', password: 'Org12345' },
+  { role: 'Participante', email: 'part@vibeu.edu', password: 'Part1234' },
 ] as const

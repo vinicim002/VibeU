@@ -5,7 +5,7 @@ import {
   fetchEventById,
   getAvailableLotSpots,
   subscribeToEvent,
-} from '@/api/mockApi'
+} from '@/api'
 import { useAuth } from '@/contexts/AuthContext'
 import { RequireAuth } from '@/components/common/RequireAuth'
 import { CATEGORY_LABELS, ROUTES } from '@/constants/routes'

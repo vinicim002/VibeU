@@ -59,8 +59,10 @@ export function AppRoutes() {
             path={ROUTES.ADMIN_DASHBOARD}
             element={
               <DashboardLayout
-                title="ADMIN"
-                navItems={[{ to: ROUTES.ADMIN_DASHBOARD, label: 'Visão Geral' }]}
+                title="PAINEL ADMIN"
+                subtitle="Métricas, eventos, organizadores e instituições em um só lugar."
+                variant="admin"
+                navItems={[]}
               />
             }
           >
